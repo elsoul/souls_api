@@ -1,0 +1,2 @@
+class ArticleSeries < ApplicationRecord
+end

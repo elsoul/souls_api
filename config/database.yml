@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  username: <%= ENV.fetch("DB_USER") { "" } %>
+  port: 5432
+
+development:
+  <<: *default
+  database: graphql_api_dev
+  password: <%= ENV.fetch("DB_PW") { "" } %>
+  host: <%= ENV.fetch("DB_HOST") { "" } %>
+
+production:
+  <<: *default
+  database: graphql_api_production
+  password: <%= ENV.fetch("DB_PW") { "" } %>
+  host: <%= ENV.fetch("DB_HOST") { "" } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+test:
+  <<: *default
+  database: graphql_api_test_<%= ENV['TEST_ENV_NUMBER'] %>
+  password: <%= ENV.fetch("DB_PW")  { "" } %>
+  host: <%= ENV.fetch("DB_HOST")  { "" } %>
