@@ -4,21 +4,21 @@ steps:
   - image
   - build
   - -t
-  - asia.gcr.io/$PROJECT_ID/graphql-api
+  - asia.gcr.io/$PROJECT_ID/souls-graph
   - .
 
 - name: gcr.io/cloud-builders/docker
   args:
   - image
   - push
-  - asia.gcr.io/$PROJECT_ID/graphql-api
+  - asia.gcr.io/$PROJECT_ID/souls-graph
 
 - name: gcr.io/cloud-builders/gcloud
   args:
   - run
   - deploy
-  - graphql-api
-  - --image=asia.gcr.io/$PROJECT_ID/graphql-api
+  - souls-graph
+  - --image=asia.gcr.io/$PROJECT_ID/souls-graph
   - --platform=managed
   - --region=asia-northeast1
   - --allow-unauthenticated
@@ -26,7 +26,7 @@ steps:
   - --concurrency=80
   - --port=8080
   - --service-account=elsoul-main@$PROJECT_ID.iam.gserviceaccount.com
-  - --set-cloudsql-instances=elsoul2:asia-northeast1:elsoul
+  - --set-cloudsql-instances=souls:asia-northeast1:elsoul
 
 timeout: 1600s
 options:
