@@ -1,7 +1,7 @@
 class CreateArticles < ActiveRecord::Migration[6.0]
   def change
     create_table :articles do |t|
-      t.references :user, type: :string
+      t.references :user
       t.string :title, null: false
       t.text :body, null: false
       t.string :thumnail_url, null: false

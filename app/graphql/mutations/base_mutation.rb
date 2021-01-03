@@ -17,8 +17,12 @@ module Mutations
       user = User.find_by_uid decoded_token[:user_id]
       raise ArgumentError, "Invalid or Missing Token" if user.blank?
       { status: "login success!", token: decoded_token, user: user }
-    rescue StandardError => e
-      e
+    rescue StandardError
+      raise ArgumentError, "Invalid or Missing Token"
+    end
+
+    def get_token token
+      JsonWebToken.decode token
     end
 
     def blog_host
