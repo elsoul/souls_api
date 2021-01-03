@@ -7,6 +7,7 @@ require "zeitwerk"
 require "dotenv/load"
 require "firebase_id_token"
 require "./config/initializers/firebase_id_token"
+require "./config/initializers/json_auth"
 require "graphql"
 
 loader = Zeitwerk::Loader.new

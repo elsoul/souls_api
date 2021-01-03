@@ -193,6 +193,7 @@ DEPENDENCIES
   foreman (= 0.87.2)
   graphql (= 1.11.6)
   graphql_playground (= 0.0.1)
+  jwt (= 2.2.2)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (= 5.1.0)

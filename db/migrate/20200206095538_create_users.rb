@@ -5,13 +5,13 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :username
       t.string :screen_name
       t.string :email
+      t.string :tel
       t.string :icon_url
       t.string :birthday
       t.string :lang
       t.integer :roles_mask
       t.integer :total_articles, default: 0
       t.integer :total_tweets, default: 0
-      t.integer :gem
 
       t.timestamps
     end
