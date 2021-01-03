@@ -50,6 +50,10 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    faker (2.15.1)
+      i18n (>= 1.6, < 2)
     ffi (1.14.2)
     firebase_id_token (2.4.0)
       httparty (~> 0.16, >= 0.16.2)
@@ -163,6 +167,7 @@ GEM
       rack-protection (= 2.1.0)
       sinatra (= 2.1.0)
       tilt (~> 2.0)
+    souls (0.7.3)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -185,10 +190,12 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  capybara
-  capybara-user_agent
-  database_cleaner
+  capybara (= 2.18.0)
+  capybara-user_agent (= 0.0.3)
+  database_cleaner (= 1.8.5)
   dotenv-rails (= 2.7.6)
+  factory_bot (= 6.1.0)
+  faker (= 2.15.1)
   firebase_id_token (= 2.4.0)
   foreman (= 0.87.2)
   graphql (= 1.11.6)
@@ -198,13 +205,14 @@ DEPENDENCIES
   puma (= 5.1.0)
   rack-contrib (= 2.3.0)
   rack-cors (= 1.1.1)
-  rack-test
+  rack-test (= 1.1.0)
   rake (= 13.0.3)
   rspec (= 3.10.0)
   rubocop (= 1.7.0)
   sinatra (= 2.1.0)
   sinatra-activerecord (= 2.0.21)
   sinatra-contrib (= 2.1.0)
+  souls (= 0.7.3)
   spring (= 2.1.0)
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
@@ -212,4 +220,4 @@ DEPENDENCIES
   zeitwerk (= 2.4.2)
 
 BUNDLED WITH
-   2.2.3
+   2.2.4
