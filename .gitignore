@@ -20,6 +20,7 @@
 /infra/config/*
 .env
 .envrc
+.irb_history
 /public/assets
 .byebug_history
 .DS_Store

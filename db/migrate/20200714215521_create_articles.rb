@@ -9,8 +9,8 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.references :article_category, null: false
       t.boolean :is_public, default: false
       t.text :tag, array: true, default: []
-      t.integer :created_at, null: false, default: 0
-      t.integer :updated_at, null: false, default: 0
+
+      t.timestamps
     end
   end
 end
