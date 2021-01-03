@@ -1,7 +1,6 @@
 class CreateArticles < ActiveRecord::Migration[6.0]
   def change
-    create_table :articles, id: false do |t|
-      t.string :id, primary_key: true
+    create_table :articles do |t|
       t.references :user, type: :string
       t.string :title, null: false
       t.text :body, null: false

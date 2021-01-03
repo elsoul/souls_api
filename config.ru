@@ -1,5 +1,4 @@
 require "./app"
-
 require "graphql_playground"
 
 map "/playground" do

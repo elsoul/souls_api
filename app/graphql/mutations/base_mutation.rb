@@ -12,6 +12,15 @@ module Mutations
       @payload
     end
 
+    def login_auth token:
+      decoded_token = JsonWebToken.decode token
+      user = User.find_by_uid decoded_token[:user_id]
+      raise ArgumentError, "Invalid or Missing Token" if user.blank?
+      { status: "login success!", token: decoded_token, user: user }
+    rescue StandardError => e
+      e
+    end
+
     def blog_host
       return "localhost:50051" if Rails.env.development? || Rails.env.test?
       ENV["GRPC_SERVER_URL1"]

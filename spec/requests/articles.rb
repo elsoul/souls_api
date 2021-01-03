@@ -5,7 +5,7 @@ RSpec.describe Articles, type: :request do
   describe ".resolve" do
     it "returns an article" do
       article = FactoryBot.create(:article, user_id: user.id, article_category_id: article_category.id)
-      post "/v2/graphql", params: { query: query(id: article.id) }
+      post "/graphql", params: { query: query(id: article.id) }
       json = JSON.parse(response.body)
       data = json["data"]["article"]
       expect(data).to include(

@@ -10,6 +10,8 @@ require "./config/initializers/firebase_id_token"
 require "./config/initializers/json_auth"
 require "graphql"
 
+include JsonAuth
+
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
 

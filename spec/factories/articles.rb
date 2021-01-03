@@ -8,8 +8,5 @@ FactoryBot.define do
     association :article_category, factory: :article_category
     is_public { true }
     tag { ["tag1", "tag2", "tag3"] }
-    has_series { false }
-    series_id { 1 }
-    episode_num { Faker::Number.number(digits: 1) }
   end
 end

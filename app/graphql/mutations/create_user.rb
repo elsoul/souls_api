@@ -1,6 +1,7 @@
 module Mutations
+  include JsonAuth
   class CreateUser < BaseMutation
-    argument :id, String, required: true
+    argument :token, String, required: true
     argument :username, String, required: true
     argument :email, String, required: true
     argument :screen_name, String, required: true
@@ -9,18 +10,27 @@ module Mutations
     argument :lang, String, required: false
     argument :total_articles, String, required: false
     argument :total_tweets, String, required: false
-    argument :tw_consumer_key, String, required: false
-    argument :tw_consumer_secret, String, required: false
-    argument :tw_access_token, String, required: false
-    argument :tw_access_token_secret, String, required: false
     argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
     argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
 
-    field :user, Types::UserType, null: false
+    field :status, String, null: true
+    field :user, Types::UserType, null: true
+    field :token, String, null: true
 
     def resolve **args
-      user = User.create!(args)
-      { user: user }
+      fb_auth token: args[:token]
+      token = JsonWebToken.encode({ user_id: @payload["sub"] }, 0)
+      begin
+        user = User.find token
+        user.update(icon_url: @payload["picture"], username: @payload["name"])
+        session_token = JsonWebToken.encode(user_id: @payload["sub"])
+        { status: "ログイン成功!", token: session_token, user: user }
+      rescue
+        user = User.create(id: token, email: @payload["email"])
+        user.update(icon_url: @payload["picture"], username: @payload["name"])
+        session_token = JsonWebToken.encode(user_id: @payload["sub"])
+        { status: "ユーザー新規登録完了!", token: session_token, user: user }
+      end
     rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
     end
