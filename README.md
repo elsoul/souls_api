@@ -1,5 +1,5 @@
-# Ruby GraphQL API Server with gRPC
-Ruby GraphQL API Server with gRPC Boilerplate
+# Ruby GraphQL API Server
+Ruby GraphQL API Serve Boilerplate
 
 <p align="center">
 
@@ -14,8 +14,8 @@ Ruby GraphQL API Server with gRPC Boilerplate
 git clone
 
 ```
-  git clone git@github.com:elsoul/souls_api.git
-  cd souls_api
+  git clone git@github.com:elsoul/souls_graph.git
+  cd souls_graph
   bundle install
 ```
 
@@ -72,11 +72,11 @@ Then you will get response below;
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org/gems/souls_api).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org/gems/souls_graph).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/souls_api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/souls_graph. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -84,4 +84,4 @@ The gem is available as open source under the terms of the [Apache-2.0 License](
 
 ## Code of Conduct
 
-Everyone interacting in the HotelPrice project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/souls_api/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the HotelPrice project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/souls_graph/blob/master/CODE_OF_CONDUCT.md).
