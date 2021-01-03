@@ -10,7 +10,7 @@ module Mutations
     argument :public_date, Integer, required: true
     argument :is_public, Boolean, required: false
     argument :tag, [String], required: false
-    argument :token, String, required: false
+    argument :category_id, Integer, required: false
 
     def resolve **args
       # login_auth token: context[:token]
