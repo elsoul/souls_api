@@ -12,5 +12,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_index :articles, :title
+    add_index :articles, :is_public
   end
 end

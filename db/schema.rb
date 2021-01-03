@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
   end
 
   create_table "articles", force: :cascade do |t|
-    t.string "user_id"
+    t.bigint "user_id"
     t.string "title", null: false
     t.text "body", null: false
     t.string "thumnail_url", null: false
@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
     t.bigint "article_category_id", null: false
     t.boolean "is_public", default: false
     t.text "tag", default: [], array: true
-    t.integer "created_at", default: 0, null: false
-    t.integer "updated_at", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
+    t.index ["is_public"], name: "index_articles_on_is_public"
+    t.index ["title"], name: "index_articles_on_title"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
