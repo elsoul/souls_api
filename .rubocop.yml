@@ -191,3 +191,5 @@ Style/Send:
   Enabled: false
 Style/MixinUsage:
   Enabled: false
+Style/GlobalStdStream:
+  Enabled: false

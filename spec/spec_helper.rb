@@ -32,7 +32,8 @@ require "capybara/user_agent"
 require "factory_bot"
 require "faker"
 
-#require_relative '../spec/queries/articles.rb'
+# Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/queries"].sort.each { |file| require file }
+
 
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
