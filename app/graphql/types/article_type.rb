@@ -1,7 +1,7 @@
 module Types
   class ArticleType < Types::BaseObject
     description "Article"
-    field :id, Integer, null: true
+    field :id, ID, null: true
     field :user_id, String, null: true
     field :title, String, null: true
     field :body, String, null: true
