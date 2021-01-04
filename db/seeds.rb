@@ -5,9 +5,11 @@ Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/factories/*.rb"].sort
 
 user = FactoryBot.create(:user)
 puts "User created!" if user
-500.times do |i|
+50000.times do |i|
   article_category = FactoryBot.create(:article_category, id: i + 1)
   puts "#{i + 1}: Article Category Created!\n #{article_category.to_json}" if article_category
+rescue
+  retry
 end
 
 

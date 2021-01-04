@@ -10,12 +10,9 @@ module Queries
         data = json["data"]["article"]
         expect(data).to include(
           "id" => article.id.to_s,
-          "userId" => article.user_id,
           "title" => article.title,
           "body" => article.body,
           "articleCategoryId" => article.article_category_id,
-          "hasSeries" => article.has_series,
-          "episodeNum" => article.episode_num,
           "thumnailUrl" => article.thumnail_url
         )
       end
@@ -27,12 +24,9 @@ module Queries
         query {
           article(id: #{id}) {
             id
-            userId
             title
             body
             articleCategoryId
-            hasSeries
-            episodeNum
             thumnailUrl
           }
         }
