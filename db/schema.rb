@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
     t.string "title", null: false
     t.text "body", null: false
     t.string "thumnail_url", null: false
-    t.integer "public_date", null: false
+    t.datetime "public_date", null: false
     t.bigint "article_category_id", null: false
     t.boolean "is_public", default: false
     t.text "tag", default: [], array: true

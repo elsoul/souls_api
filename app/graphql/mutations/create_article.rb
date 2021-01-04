@@ -13,7 +13,8 @@ module Mutations
 
     def resolve **args
       # login_auth token: context[:token]
-      Article.create!(args)
+      args[:user_id] = 1
+      { article: Article.create!(args) }
     rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
         " #{e.record.errors.full_messages.join(', ')}")

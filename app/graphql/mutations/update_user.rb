@@ -1,9 +1,10 @@
 module Mutations
   include JsonAuth
-  class CreateUser < BaseMutation
-    argument :token, String, required: true
+  class UpdateUser < BaseMutation
+    argument :uid, String, required: true
     argument :username, String, required: true
     argument :email, String, required: true
+    argument :tel, String, required: true
     argument :screen_name, String, required: true
     argument :icon_url, String, required: false
     argument :birthday, String, required: false
