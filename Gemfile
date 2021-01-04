@@ -27,6 +27,7 @@ group :development, :test do
   gem "rack-test", "1.1.0"
   gem "rspec", "3.10.0"
   gem "rubocop", "1.7.0"
+  gem "steep", "0.39.0"
   gem "webmock", "3.11.0"
 end
 
