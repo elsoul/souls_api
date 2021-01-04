@@ -14,37 +14,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 #
-require "erb"
-require "sinatra"
-require "sinatra/json"
-require "sinatra/activerecord"
-require "rack/contrib"
-require "zeitwerk"
-require "dotenv/load"
-require "firebase_id_token"
-require "./config/initializers/firebase_id_token"
-require "graphql"
+require "./app"
 
 require "rspec"
 require "database_cleaner"
 require "capybara/rspec"
 require "capybara/user_agent"
-require "factory_bot"
-require "faker"
 
-# Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/queries"].sort.each { |file| require file }
-
-
-loader = Zeitwerk::Loader.new
-loader.push_dir("#{Dir.pwd}/app/models")
-
-loader.do_not_eager_load("#{Dir.pwd}/app/services")
-loader.collapse("#{__dir__}/app/types")
-loader.collapse("#{__dir__}/app/mutations")
-loader.collapse("#{__dir__}/app/queries")
-loader.collapse("#{__dir__}/app/services")
-loader.push_dir("#{Dir.pwd}/app/graphql")
-loader.setup
+Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/queries/*.rb"].sort.each { |file| require file }
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
