@@ -10,8 +10,8 @@ module Mutations
       begin
         user = User.find @payload["sub"]
         user.update(icon_url: @payload["picture"], username: @payload["name"])
-        token = JsonWebToken.encode(user_id: user.id)
-        { status: "ログイン成功!", username: user.username, token: token }
+        token_base = JsonWebToken.encode(user_id: user.id)
+        { status: "ログイン成功!", username: user.username, token: token_base }
       rescue
         user = User.new(uid: @payload["sub"], email: @payload["email"], icon_url: @payload["picture"], username: @payload["name"])
         if user.save

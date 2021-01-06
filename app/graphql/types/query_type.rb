@@ -3,9 +3,13 @@ module Types
     field :article, resolver: Queries::Article
     field :articles, Types::ArticleType.connection_type, null: true
     field :user, resolver: Queries::User
-    field :users, resolver: Queries::Users
+    field :users, Types::UserType.connection_type, null: true
     field :article_categories, Types::ArticleCategoryType.connection_type, null: true do
       description "article_categories"
+    end
+
+    def users
+      User.all.order(id: :desc)
     end
 
     def article_categories
