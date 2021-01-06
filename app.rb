@@ -13,6 +13,7 @@ require "./config/initializers/firebase_id_token"
 require "./config/initializers/json_auth"
 require "graphql"
 require "logger"
+require "base64"
 
 include JsonAuth
 

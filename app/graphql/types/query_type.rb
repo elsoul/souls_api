@@ -1,5 +1,7 @@
 module Types
   class QueryType < Types::BaseObject
+    add_field(GraphQL::Types::Relay::NodeField)
+    add_field(GraphQL::Types::Relay::NodesField)
     field :article, resolver: Queries::Article
     field :articles, Types::ArticleType.connection_type, null: true
     field :user, resolver: Queries::User

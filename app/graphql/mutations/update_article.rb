@@ -6,24 +6,20 @@ module Mutations
     argument :title, String, required: false
     argument :body, String, required: false
     argument :thumnail_url, String, required: false
-    argument :public_date, String, required: false
+    argument :public_date, GraphQL::Types::ISO8601DateTime, required: false
     argument :article_category_id, Integer, required: false
     argument :is_public, Boolean, required: false
     argument :tag, [String], required: false
-    argument :has_series, Boolean, required: false
-    argument :series_id, Integer, required: false
-    argument :episode_num, Integer, required: false
     argument :created_at, GraphQL::Types::ISO8601DateTime, required: false
     argument :updated_at, GraphQL::Types::ISO8601DateTime, required: false
 
     def resolve **args
-      client = blog_service_grpc_build_client
-      articles = []
-      articles << Rpc::Article.new(args)
-      article = client.call(:UpdateArticles, articles)
-      { article: Article.new(article.message.articles[0].to_h) }
-    rescue StandardError => e
-      puts e.error.inspect
+      article = Article.find args[:id]
+      article.update args
+      { article: Article.find(args[:id]) }
+    rescue ActiveRecord::RecordInvalid => e
+      GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
+        " #{e.record.errors.full_messages.join(', ')}")
     end
   end
 end

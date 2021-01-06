@@ -1,2 +1,2 @@
-web: bundle exec puma -p 3000 -e production
+web: bundle exec puma -p 3000
 worker: redis-server

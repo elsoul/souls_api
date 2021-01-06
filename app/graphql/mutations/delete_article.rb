@@ -4,11 +4,12 @@ module Mutations
     argument :id, Integer, required: true
 
     def resolve id:
-      client = blog_service_grpc_build_client
-      article = client.call(:DeleteArticle, id: id)
-      { article: Article.new(article.message.article.to_h) }
-    rescue StandardError => e
-      puts e.error.inspect
+      article = Article.find id
+      article.destroy
+      { article: article }
+    rescue ActiveRecord::RecordInvalid => e
+      GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
+        " #{e.record.errors.full_messages.join(', ')}")
     end
   end
 end

@@ -6,7 +6,7 @@ module Mutations
     argument :token, String, required: false
 
     def resolve token:
-      fb_auth token: token[:token]
+      fb_auth token: token
       begin
         user = User.find @payload["sub"]
         user.update(icon_url: @payload["picture"], username: @payload["name"])
