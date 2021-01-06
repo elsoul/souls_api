@@ -1,12 +1,10 @@
 module Mutations
-
   class CreateArticleCategory < BaseMutation
     field :article_category, Types::ArticleCategoryType, null: false
     field :error, String, null: false
 
     argument :name, String, required: true
     argument :tag, [String], required: false
-
 
     def resolve **args
       login_auth token: context[:token]
