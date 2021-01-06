@@ -22,6 +22,8 @@ class SoulsApiSchema < GraphQL::Schema
       Types::ArticleType
     when User
       Types::UserType
+    when ArticleCategory
+      Types::ArticleCategory
     else
       raise("Unexpected object: #{obj}")
     end

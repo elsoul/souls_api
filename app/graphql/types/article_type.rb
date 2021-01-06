@@ -4,7 +4,6 @@ module Types
     implements GraphQL::Types::Relay::Node
 
     global_id_field :id
-    # field :id, ID, null: true
     field :title, String, null: true
     field :body, String, null: true
     field :thumnail_url, String, null: true
