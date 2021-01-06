@@ -13,7 +13,7 @@ gem "rake", "13.0.3"
 gem "sinatra", "2.1.0"
 gem "sinatra-activerecord", "2.0.21"
 gem "sinatra-contrib", "2.1.0"
-gem "souls", "0.7.3"
+gem "souls", "0.7.9"
 gem "zeitwerk", "2.4.2"
 
 group :development, :test do
