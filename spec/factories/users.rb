@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :user do
-    id { Faker::Number.number(digits: 1) }
     uid { Faker::Internet.uuid }
     username { Faker::Name.name }
     screen_name { Faker::Name.name }

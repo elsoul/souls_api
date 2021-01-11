@@ -4,6 +4,8 @@ module Queries
 
     def resolve
       ::ArticleCategory.all
+    rescue StandardError => e
+      GraphQL::ExecutionError.new e
     end
   end
 end

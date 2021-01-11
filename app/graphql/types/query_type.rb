@@ -6,9 +6,7 @@ module Types
     field :articles, Types::ArticleType.connection_type, null: true
     field :user, resolver: Queries::User
     field :users, Types::UserType.connection_type, null: true
-    field :article_categories, Types::ArticleCategoryType.connection_type, null: true do
-      description "article_categories"
-    end
+    field :article_categories, Types::ArticleCategoryType.connection_type, null: true
 
     def users
       User.all.order(id: :desc)

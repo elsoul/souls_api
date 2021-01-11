@@ -7,6 +7,7 @@ FactoryBot.define do
     public_date { Time.now }
     association :article_category, factory: :article_category
     is_public { true }
+    slag { Faker::Internet.uuid }
     tag { ["tag1", "tag2", "tag3"] }
   end
 end

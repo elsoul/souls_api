@@ -8,7 +8,7 @@ development:
   <<: *default
   database: graphql_api_dev
   password: <%= ENV.fetch("DB_PW") { "" } %>
-  host: <%= ENV.fetch("DB_HOST") { "" } %>
+  host: <%= ENV.fetch("DB_DEV_HOST") { "" } %>
 
 production:
   <<: *default
@@ -17,8 +17,15 @@ production:
   host: <%= ENV.fetch("DB_HOST") { "" } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+
+## Use local docker postgresql13
+## `souls i run_psql` will create psql container
+
 test:
   <<: *default
-  database: graphql_api_test_<%= ENV['TEST_ENV_NUMBER'] %>
-  password: <%= ENV.fetch("DB_PW")  { "" } %>
-  host: <%= ENV.fetch("DB_HOST")  { "" } %>
+  username: postgres
+  password: postgres
+  database: souls_dev
+  host: localhost
+  port: 5433
+

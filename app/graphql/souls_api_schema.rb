@@ -23,9 +23,9 @@ class SoulsApiSchema < GraphQL::Schema
     when User
       Types::UserType
     when ArticleCategory
-      Types::ArticleCategory
+      Types::ArticleCategoryType
     else
-      raise("Unexpected object: #{obj}")
+      GraphQL::ExecutionError.new("Unexpected object: #{obj}")
     end
   end
 

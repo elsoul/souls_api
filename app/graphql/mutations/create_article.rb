@@ -7,17 +7,24 @@ module Mutations
     argument :body, String, required: true
     argument :thumnail_url, String, required: true
     argument :public_date, GraphQL::Types::ISO8601DateTime, required: true
-    argument :is_public, Boolean, required: false
+    argument :is_public, Boolean, required: true
+    argument :slag, String, required: true
     argument :tag, [String], required: false
-    argument :article_category_id, Integer, required: false
+    argument :article_category_id, String, required: true
 
     def resolve **args
-      # login_auth token: context[:token]
-      args[:user_id] = 1
-      { article: Article.create!(args) }
-    rescue ActiveRecord::RecordInvalid => e
-      GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
-        " #{e.record.errors.full_messages.join(', ')}")
+      auth_check context
+      args[:user_id] = context[:user_id]
+      _, args[:article_category_id] = SoulsApiSchema.from_global_id(args[:article_category_id])
+      article = Article.new args
+      if article.save
+        { article: article }
+      else
+        { error: article.errors.full_messages }
+      end
+    rescue StandardError => error
+      GraphQL::ExecutionError.new("StandardError:"\
+        " #{error}")
     end
   end
 end

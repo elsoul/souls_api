@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :article, dependent: :destroy
   before_save :downcase_email
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :uid, uniqueness: true
   validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }

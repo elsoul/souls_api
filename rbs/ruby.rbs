@@ -1,3 +1,0 @@
-class C
-  def foo: (id: Integer, user: Integer) -> { id: Integer, user: Integer }
-end

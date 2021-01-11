@@ -17,39 +17,43 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "total_articles", default: 0
     t.text "tag", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_article_categories_on_name"
   end
 
   create_table "articles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title", null: false
-    t.text "body", null: false
-    t.string "thumnail_url", null: false
-    t.datetime "public_date", null: false
+    t.text "body", default: "", null: false
+    t.string "thumnail_url", default: "", null: false
+    t.datetime "public_date", default: "2029-03-30 09:37:37", null: false
     t.bigint "article_category_id", null: false
-    t.boolean "is_public", default: false
+    t.boolean "is_public", default: false, null: false
+    t.boolean "just_created", default: true, null: false
+    t.string "slag", null: false
     t.text "tag", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
     t.index ["is_public"], name: "index_articles_on_is_public"
-    t.index ["title"], name: "index_articles_on_title"
+    t.index ["slag"], name: "index_articles_on_slag", unique: true
+    t.index ["title"], name: "index_articles_on_title", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "key_groups", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "key_name"
     t.integer "total_key_num", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_key_groups_on_name"
   end
 
   create_table "user_keys", force: :cascade do |t|
-    t.string "user_id"
+    t.bigint "user_id"
     t.bigint "key_group_id", null: false
     t.text "key"
     t.datetime "created_at", precision: 6, null: false
@@ -59,15 +63,15 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "uid"
+    t.string "uid", null: false
     t.string "username"
     t.string "screen_name"
-    t.string "email"
+    t.string "email", null: false
     t.string "tel"
     t.string "icon_url"
     t.string "birthday"
     t.string "lang"
-    t.integer "roles_mask"
+    t.integer "roles_mask", default: 1, null: false
     t.integer "total_articles", default: 0
     t.integer "total_tweets", default: 0
     t.datetime "created_at", precision: 6, null: false

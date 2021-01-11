@@ -5,9 +5,8 @@ module Queries
 
     def resolve id:
       ::Article.find(id)
-    rescue ActiveRecord::RecordInvalid => e
-      GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
-        " #{e.record.errors.full_messages.join(', ')}")
+    rescue StandardError => e
+      GraphQL::ExecutionError.new e
     end
   end
 end

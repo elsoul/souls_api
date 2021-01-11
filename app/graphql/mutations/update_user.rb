@@ -1,5 +1,4 @@
 module Mutations
-  include JsonAuth
   class UpdateUser < BaseMutation
     argument :uid, String, required: true
     argument :username, String, required: true

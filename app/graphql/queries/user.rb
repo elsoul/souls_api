@@ -5,6 +5,8 @@ module Queries
 
     def resolve id:
       ::User.find id
+    rescue StandardError => e
+      GraphQL::ExecutionError.new e
     end
   end
 end

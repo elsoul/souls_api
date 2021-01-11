@@ -1,5 +1,8 @@
 AllCops:
   EnabledByDefault: true
+  Exclude:
+    - "db/migrate/*.rb"
+    - "db/schema.rb"
 
 Style/AndOr:
   Enabled: false
@@ -72,6 +75,8 @@ Style/StringHashKeys:
 
 Style/GuardClause:
   MinBodyLength: 5
+  Exclude:
+    - "spec/spec_helper.rb"
 
 Style/HashSyntax:
   EnforcedStyle: ruby19
@@ -193,3 +198,12 @@ Style/MixinUsage:
   Enabled: false
 Style/GlobalStdStream:
   Enabled: false
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+Layout/TrailingEmptyLines:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+    Enabled: false
+Style/ClassVars:
+  Exclude:
+  - "spec/spec_helper.rb"

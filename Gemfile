@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
-gem "dotenv-rails", "2.7.6"
+gem "activesupport", "6.1.0"
+gem "dotenv", "2.7.6"
 gem "firebase_id_token", "2.4.0"
 gem "foreman", "0.87.2"
 gem "graphql", "1.11.6"
@@ -13,7 +14,6 @@ gem "rake", "13.0.3"
 gem "sinatra", "2.1.0"
 gem "sinatra-activerecord", "2.0.21"
 gem "sinatra-contrib", "2.1.0"
-gem "souls", "0.7.9"
 gem "zeitwerk", "2.4.2"
 
 group :development, :test do
@@ -27,6 +27,8 @@ group :development, :test do
   gem "rack-test", "1.1.0"
   gem "rspec", "3.10.0"
   gem "rubocop", "1.7.0"
+  gem "slack-ruby3", "0.1.1"
+  gem "souls", "0.8.0"
   gem "steep", "0.39.0"
   gem "webmock", "3.11.0"
 end
