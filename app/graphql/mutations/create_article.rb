@@ -14,9 +14,10 @@ module Mutations
 
     def resolve **args
       auth_check context
-      args[:user_id] = context[:user_id]
+      args[:user_id] = context[:user].id
       _, args[:article_category_id] = SoulsApiSchema.from_global_id(args[:article_category_id])
       article = Article.new args
+      check_user_permissions(context[:user], article, :create?)
       if article.save
         { article: article }
       else

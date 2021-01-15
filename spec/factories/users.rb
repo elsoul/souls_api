@@ -6,6 +6,7 @@ FactoryBot.define do
     icon_url { Faker::Internet.url }
     email { Faker::Internet.email }
     tel { Faker::PhoneNumber.cell_phone }
+    roles_mask { 1 }
     birthday { "MyString" }
     lang { "MyString" }
     total_articles { 2 }

@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include RoleModel
+  roles :user, :retailer, :agent, :staff, :admin, :master
+
   has_many :article, dependent: :destroy
   before_save :downcase_email
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

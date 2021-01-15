@@ -207,3 +207,5 @@ Style/PercentLiteralDelimiters:
 Style/ClassVars:
   Exclude:
   - "spec/spec_helper.rb"
+Style/StringConcatenation:
+  Enabled: false

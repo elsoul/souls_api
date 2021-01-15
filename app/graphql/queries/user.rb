@@ -4,7 +4,9 @@ module Queries
     argument :id, ID, required: true
 
     def resolve id:
-      ::User.find id
+      user = ::User.find id
+      check_user_permissions(context[:user], user, :show?)
+      user
     rescue StandardError => e
       GraphQL::ExecutionError.new e
     end

@@ -22,6 +22,7 @@ module Mutations
       token = JsonWebToken.encode({ user_id: @payload["sub"] }, 0)
       begin
         user = User.find token
+        check_user_permissions(context[:user], user, :update?)
         user.update(icon_url: @payload["picture"], username: @payload["name"])
         session_token = JsonWebToken.encode(user_id: @payload["sub"])
         { status: "ログイン成功!", token: session_token, user: user }

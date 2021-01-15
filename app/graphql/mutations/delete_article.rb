@@ -5,6 +5,7 @@ module Mutations
 
     def resolve id:
       article = Article.find id
+      check_user_permissions(context[:user], article, :delete?)
       article.destroy
       { article: article }
     rescue ActiveRecord::RecordInvalid => e

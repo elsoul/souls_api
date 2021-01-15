@@ -8,6 +8,7 @@ module Mutations
 
     def resolve **args
       auth_check context
+      check_user_permissions(context[:user], ArticleCategory.new, :create?)
       { article_category: ArticleCategory.create!(args) }
     rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\

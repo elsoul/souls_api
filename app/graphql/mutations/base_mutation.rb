@@ -13,7 +13,7 @@ module Mutations
     end
 
     def auth_check context
-      raise GraphQL::ExecutionError, "You need to sign in!!" if context[:user_id].nil?
+      raise GraphQL::ExecutionError, "You need to sign in!!" if context[:user].nil?
     end
 
     def get_token token

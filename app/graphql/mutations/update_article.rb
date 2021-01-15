@@ -15,6 +15,7 @@ module Mutations
 
     def resolve **args
       article = Article.find args[:id]
+      check_user_permissions(context[:user], article, :update?)
       article.update args
       { article: Article.find(args[:id]) }
     rescue ActiveRecord::RecordInvalid => e

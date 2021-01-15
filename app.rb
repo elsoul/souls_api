@@ -18,6 +18,8 @@ require "graphql"
 require "logger"
 require "base64"
 require "slack/ruby3"
+require "role_model"
+require "pundit"
 
 ENV["RACK_ENV"] ||= "development"
 
@@ -26,7 +28,8 @@ ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
 
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
-loader.push_dir("#{Dir.pwd}/app/lib")
+loader.push_dir("#{Dir.pwd}/app/helpers")
+loader.push_dir("#{Dir.pwd}/app/policies")
 
 loader.do_not_eager_load("#{Dir.pwd}/app/services")
 loader.collapse("#{__dir__}/app/types")
@@ -36,7 +39,11 @@ loader.collapse("#{__dir__}/app/services")
 loader.push_dir("#{Dir.pwd}/app/graphql")
 loader.setup
 
+include UserHelper
+
 class SoulsApi < Sinatra::Base
+  include Pundit
+
   ::Logger.class_eval { alias_method :write, :<< }
   access_log = ::File.join(::File.dirname(::File.expand_path(__FILE__)), "log", "access.log")
   access_logger = ::Logger.new(access_log)
@@ -75,10 +82,11 @@ class SoulsApi < Sinatra::Base
 
   post "/graphql" do
     token = request.env["HTTP_AUTHORIZATION"]
-    user_id = token ? login_auth(token: token) : nil
+    user = token ? login_auth(token: token) : nil
     context = {
-      user_id: user_id
+      user: user
     }
+    p context[:user]
     result = SoulsApiSchema.execute(
       params[:query],
       variables: params[:variables],
@@ -95,7 +103,7 @@ class SoulsApi < Sinatra::Base
     user_id = decoded_token[:user_id]
     user = User.find user_id
     return if user.blank?
-    user_id
+    user
   rescue StandardError => error
     message = { error: error }
     json message
