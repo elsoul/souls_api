@@ -19,6 +19,10 @@ class UserPolicy < ApplicationPolicy
     @user.master? || @user.admin? || @user.staff? && @user.id == @record.user_id
   end
 
+  def update_user_role?
+    admin_permissions?
+  end
+
   private
 
   def staff_permissions?
