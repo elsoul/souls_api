@@ -30,7 +30,7 @@ group :development, :test do
   gem "rspec", "3.10.0"
   gem "rubocop", "1.7.0"
   gem "slack-ruby3", "0.1.1"
-  gem "souls", "0.8.6"
+  gem "souls", "0.10.3"
   gem "steep", "0.39.0"
   gem "webmock", "3.11.0"
 end
