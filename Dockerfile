@@ -12,7 +12,5 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 RUN gem install bundler:2.2.4
 RUN bundle
 COPY . /myapp
-RUN mkdir log
-RUN chmod -R 777 log
 
 CMD ["foreman", "start"]
