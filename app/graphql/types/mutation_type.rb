@@ -1,12 +1,12 @@
 module Types
   class MutationType < Types::BaseObject
-    field :sign_in_user, mutation: Mutations::SignInUser
-    field :update_user, mutation: Mutations::UpdateUser
-    field :add_user_role, mutation: Mutations::AddUserRole
-    field :remove_user_role, mutation: Mutations::RemoveUserRole
-    field :create_article, mutation: Mutations::CreateArticle
-    field :create_article_category, mutation: Mutations::CreateArticleCategory
-    field :update_article, mutation: Mutations::UpdateArticle
-    field :delete_article, mutation: Mutations::DeleteArticle
+    field :sign_in_user, mutation: Mutations::User::SignInUser
+    field :update_user, mutation: Mutations::User::UpdateUser
+    field :add_user_role, mutation: Mutations::User::AddUserRole
+    field :remove_user_role, mutation: Mutations::User::RemoveUserRole
+    field :create_article, mutation: Mutations::Article::CreateArticle
+    field :create_article_category, mutation: Mutations::ArticleCategory::CreateArticleCategory
+    field :update_article, mutation: Mutations::Article::UpdateArticle
+    field :delete_article, mutation: Mutations::Article::DeleteArticle
   end
 end
