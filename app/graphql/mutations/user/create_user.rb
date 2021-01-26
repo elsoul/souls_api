@@ -1,7 +1,8 @@
 module Mutations
   module User
-    class UpdateUser < BaseMutation
+    class CreateUser < BaseMutation
       field :user, Types::UserType, null: false
+      field :error, String, null: true
 
       argument :uid, String, required: false
       argument :username, String, required: false
@@ -16,9 +17,12 @@ module Mutations
       argument :total_tweets, Integer, required: false
 
       def resolve **args
-        user = ::User.find args[:id]
-        user.update args
-        { user: ::User.find(args[:id]) }
+        user = ::User.new args
+        if user.save
+          { user: user }
+        else
+          { error: user.errors.full_messages }
+        end
       rescue StandardError => error
         GraphQL::ExecutionError.new error
       end

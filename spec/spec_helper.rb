@@ -24,6 +24,7 @@ def app
 end
 
 Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/queries/*.rb"].sort.each { |file| require file }
+Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/mutations/*.rb"].sort.each { |file| require file }
 
 RSpec.configure do |config|
   config.order = :random

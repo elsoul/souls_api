@@ -71,6 +71,7 @@ Style/MissingElse:
 Style/StringHashKeys:
   Exclude:
     - "spec/queries/*.rb"
+    - "spec/mutations/*.rb"
     - "*.gemspec"
 
 Style/GuardClause:

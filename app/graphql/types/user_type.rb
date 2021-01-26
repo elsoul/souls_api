@@ -1,13 +1,13 @@
 module Types
-  class UserType < Types::BaseObject
+  class UserType < GraphQL::Schema::Object
     implements GraphQL::Types::Relay::Node
 
     global_id_field :id
-    field :uid, String, null: false
-    field :username, String, null: false
-    field :screen_name, String, null: false
-    field :email, String, null: false
-    field :tel, String, null: false
+    field :uid, String, null: true
+    field :username, String, null: true
+    field :screen_name, String, null: true
+    field :email, String, null: true
+    field :tel, String, null: true
     field :icon_url, String, null: true
     field :birthday, String, null: true
     field :lang, String, null: true

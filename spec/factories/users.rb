@@ -1,15 +1,17 @@
 FactoryBot.define do
   factory :user do
-    uid { Faker::Internet.uuid }
-    username { Faker::Name.name }
-    screen_name { Faker::Name.name }
-    icon_url { Faker::Internet.url }
-    email { Faker::Internet.email }
-    tel { Faker::PhoneNumber.cell_phone }
-    roles_mask { 1 }
+    uid { "MyString" }
+    username { "MyString" }
+    screen_name { "MyString" }
+    email { "MyString" }
+    tel { "MyString" }
+    icon_url { "MyString" }
     birthday { "MyString" }
     lang { "MyString" }
-    total_articles { 2 }
-    total_tweets { 10 }
+    roles_mask { 1 }
+    total_articles { 1 }
+    total_tweets { 1 }
+    created_at { Time.now }
+    updated_at { Time.now }
   end
 end
