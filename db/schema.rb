@@ -72,8 +72,6 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
     t.string "birthday"
     t.string "lang"
     t.integer "roles_mask", default: 1, null: false
-    t.integer "total_articles", default: 0
-    t.integer "total_tweets", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email"

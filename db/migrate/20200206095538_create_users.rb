@@ -10,8 +10,6 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :birthday
       t.string :lang
       t.integer :roles_mask, null: false, default: 1
-      t.integer :total_articles, default: 0
-      t.integer :total_tweets, default: 0
 
       t.timestamps
     end

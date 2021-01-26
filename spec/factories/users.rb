@@ -9,8 +9,6 @@ FactoryBot.define do
     birthday { "MyString" }
     lang { "MyString" }
     roles_mask { 1 }
-    total_articles { 1 }
-    total_tweets { 1 }
     created_at { Time.now }
     updated_at { Time.now }
   end
