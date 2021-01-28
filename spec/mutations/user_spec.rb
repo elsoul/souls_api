@@ -1,5 +1,5 @@
 RSpec.describe "User Mutation テスト" do
-  describe "User を作成する" do
+  describe "User データを登録する" do
     let!(:user) { FactoryBot.create(:user) }
 
     let(:mutation) do

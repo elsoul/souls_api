@@ -1,12 +1,13 @@
 module Queries
   class Article < Queries::BaseQuery
     type Types::ArticleType, null: false
-    argument :id, Integer, required: true
+    argument :id, String, required: true
 
-    def resolve id:
-      ::Article.find(id)
-    rescue StandardError => e
-      GraphQL::ExecutionError.new e
+    def resolve **args
+      _, article_id = SoulsApiSchema.from_global_id args[:id]
+      ::Article.find(article_id)
+    rescue StandardError => error
+      GraphQL::ExecutionError.new error
     end
   end
 end

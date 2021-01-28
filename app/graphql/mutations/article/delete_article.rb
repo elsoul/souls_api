@@ -5,13 +5,11 @@ module Mutations
       argument :id, Integer, required: true
 
       def resolve id:
-        article = Article.find id
-        check_user_permissions(context[:user], article, :delete?)
+        article = ::Article.find id
         article.destroy
         { article: article }
-      rescue ActiveRecord::RecordInvalid => e
-        GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
-          " #{e.record.errors.full_messages.join(', ')}")
+      rescue StandardError => error
+        GraphQL::ExecutionError.new error
       end
     end
   end

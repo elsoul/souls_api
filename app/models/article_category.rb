@@ -1,4 +1,2 @@
-class ArticleCategory < ApplicationRecord
-  has_many :article, dependent: :destroy
-  validates :name, uniqueness: true
+class ArticleCategory < ActiveRecord::Base
 end

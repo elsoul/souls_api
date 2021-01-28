@@ -8,6 +8,7 @@ module Types
     field :users, Types::UserType.connection_type, null: true
     field :article_categories, Types::ArticleCategoryType.connection_type, null: true
 
+
     def users
       User.all.order(id: :desc)
     end

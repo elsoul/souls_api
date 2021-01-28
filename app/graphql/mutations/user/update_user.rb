@@ -12,8 +12,6 @@ module Mutations
       argument :birthday, String, required: false
       argument :lang, String, required: false
       argument :roles_mask, Integer, required: false
-      argument :total_articles, Integer, required: false
-      argument :total_tweets, Integer, required: false
 
       def resolve **args
         user = ::User.find args[:id]
