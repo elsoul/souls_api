@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_164603) do
+ActiveRecord::Schema.define(version: 2020_07_14_215521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name", null: false
-    t.text "tag", default: [], array: true
+    t.text "tags", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_article_categories_on_name"
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
     t.string "title", null: false
     t.text "body", default: "", null: false
     t.string "thumnail_url", default: "", null: false
-    t.datetime "public_date", default: "2029-04-14 18:01:04", null: false
+    t.datetime "public_date", default: "2029-04-21 12:42:38", null: false
     t.bigint "article_category_id", null: false
     t.boolean "is_public", default: false, null: false
     t.boolean "just_created", default: true, null: false
     t.string "slag", null: false
-    t.text "tag", default: [], array: true
+    t.text "tags", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
@@ -41,25 +41,6 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
     t.index ["slag"], name: "index_articles_on_slag", unique: true
     t.index ["title"], name: "index_articles_on_title", unique: true
     t.index ["user_id"], name: "index_articles_on_user_id"
-  end
-
-  create_table "key_groups", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "key_name"
-    t.integer "total_key_num", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_key_groups_on_name"
-  end
-
-  create_table "user_keys", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "key_group_id", null: false
-    t.text "key"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["key_group_id"], name: "index_user_keys_on_key_group_id"
-    t.index ["user_id"], name: "index_user_keys_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,5 +61,4 @@ ActiveRecord::Schema.define(version: 2020_07_29_164603) do
     t.index ["username"], name: "index_users_on_username"
   end
 
-  add_foreign_key "user_keys", "key_groups"
 end

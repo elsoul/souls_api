@@ -5,7 +5,7 @@ module Mutations
       field :error, String, null: true
 
       argument :name, String, required: false
-      argument :tag, [String], required: false
+      argument :tags, [String], required: false
 
       def resolve **args
         article_category = ::ArticleCategory.new args

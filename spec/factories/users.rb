@@ -9,7 +9,7 @@ FactoryBot.define do
     birthday { "MyString" }
     lang { "MyString" }
     roles_mask { 1 }
-    created_at { Time.now }
-    updated_at { Time.now }
+    created_at { DateTime.now }
+    updated_at { DateTime.now }
   end
 end

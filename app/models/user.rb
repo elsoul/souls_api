@@ -1,3 +1,3 @@
 class User < ActiveRecord::Base
-  has_many :user_key, dependent: :destroy
+  has_many :article, dependent: :destroy
 end

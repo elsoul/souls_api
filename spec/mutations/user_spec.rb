@@ -1,19 +1,19 @@
 RSpec.describe "User Mutation テスト" do
   describe "User データを登録する" do
-    let!(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.attributes_for(:user) }
 
     let(:mutation) do
       %(mutation {
         createUser(input: {
-          uid: "#{user.uid}"
-          username: "#{user.username}"
-          screenName: "#{user.screen_name}"
-          email: "#{user.email}"
-          tel: "#{user.tel}"
-          iconUrl: "#{user.icon_url}"
-          birthday: "#{user.birthday}"
-          lang: "#{user.lang}"
-          rolesMask: #{user.roles_mask}
+          uid: "#{user[:uid]}"
+          username: "#{user[:username]}"
+          screenName: "#{user[:screen_name]}"
+          email: "#{user[:email]}"
+          tel: "#{user[:tel]}"
+          iconUrl: "#{user[:icon_url]}"
+          birthday: "#{user[:birthday]}"
+          lang: "#{user[:lang]}"
+          rolesMask: #{user[:roles_mask]}
         }) {
             user {
               id

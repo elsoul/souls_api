@@ -10,7 +10,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.boolean :is_public, default: false, null: false
       t.boolean :just_created, default: true, null: false
       t.string :slag, null: false, unique: true
-      t.text :tag, array: true, default: []
+      t.text :tags, array: true, default: []
 
       t.timestamps
     end

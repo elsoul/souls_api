@@ -2,10 +2,11 @@ module Mutations
   module Article
     class DeleteArticle < BaseMutation
       field :article, Types::ArticleType, null: false
-      argument :id, Integer, required: true
+      argument :id, String, required: true
 
-      def resolve id:
-        article = ::Article.find id
+      def resolve **args
+        _, data_id = SoulsApiSchema.from_global_id args[:id]
+        article = ::Article.find data_id
         article.destroy
         { article: article }
       rescue StandardError => error

@@ -1,6 +1,6 @@
 RSpec.describe "User Query テスト" do
   describe "User データを取得する" do
-    let!(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     let(:query) do
       data_id = Base64.encode64("User:#{user.id}")
@@ -16,19 +16,19 @@ RSpec.describe "User Query テスト" do
           birthday
           lang
           rolesMask
-          }
         }
-      )
-    end
+      }
+    )
+  end
 
-    subject(:result) do
-      SoulsApiSchema.execute(query).as_json
-    end
+  subject(:result) do
+    SoulsApiSchema.execute(query).as_json
+  end
 
-    it "return User Data" do
-      a1 = result.dig("data", "user")
-      expect(a1).to include(
-        "id" => be_a(String),
+  it "return User Data" do
+    a1 = result.dig("data", "user")
+    expect(a1).to include(
+      "id" => be_a(String),
         "uid" => be_a(String),
         "username" => be_a(String),
         "screenName" => be_a(String),

@@ -4,8 +4,8 @@ module Queries
     argument :id, String, required: true
 
     def resolve **args
-      _, article_id = SoulsApiSchema.from_global_id args[:id]
-      ::Article.find(article_id)
+      _, data_id = SoulsApiSchema.from_global_id args[:id]
+      ::Article.find(data_id)
     rescue StandardError => error
       GraphQL::ExecutionError.new error
     end

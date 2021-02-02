@@ -3,6 +3,7 @@ module Mutations
     class UpdateUser < BaseMutation
       field :user, Types::UserType, null: false
 
+      argument :id, String, required: true
       argument :uid, String, required: false
       argument :username, String, required: false
       argument :screen_name, String, required: false
@@ -14,6 +15,7 @@ module Mutations
       argument :roles_mask, Integer, required: false
 
       def resolve **args
+        _, args[:id] = SoulsApiSchema.from_global_id(args[:id])
         user = ::User.find args[:id]
         user.update args
         { user: ::User.find(args[:id]) }

@@ -1,0 +1,30 @@
+RSpec.describe "ArticleCategory Query テスト" do
+  describe "ArticleCategory データを取得する" do
+    let(:article_category) { FactoryBot.create(:article_category) }
+
+    let(:query) do
+      data_id = Base64.encode64("ArticleCategory:#{article_category.id}")
+      %(query {
+        articleCategory(id: \"#{data_id}\") {
+          id
+          name
+          tags
+        }
+      }
+    )
+  end
+
+  subject(:result) do
+    SoulsApiSchema.execute(query).as_json
+  end
+
+  it "return ArticleCategory Data" do
+    a1 = result.dig("data", "articleCategory")
+    expect(a1).to include(
+      "id" => be_a(String),
+        "name" => be_a(String),
+        "tags" => be_all(String),
+        )
+    end
+  end
+end

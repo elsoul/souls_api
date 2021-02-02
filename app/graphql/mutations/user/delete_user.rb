@@ -2,10 +2,11 @@ module Mutations
   module User
     class DeleteUser < BaseMutation
       field :user, Types::UserType, null: false
-      argument :id, Integer, required: true
+      argument :id, String, required: true
 
-      def resolve id:
-        user = ::User.find id
+      def resolve **args
+        _, data_id = SoulsApiSchema.from_global_id args[:id]
+        user = ::User.find data_id
         user.destroy
         { user: user }
       rescue StandardError => error
