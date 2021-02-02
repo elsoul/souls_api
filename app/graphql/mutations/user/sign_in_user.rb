@@ -1,5 +1,7 @@
 module Mutations
   module User
+    ## User Domain Check if needed
+    # DOMAINLIST = ["el-soul.com", "elsoul.nl"]
     class SignInUser < BaseMutation
       field :status, String, null: false
       field :username, String, null: true
@@ -8,6 +10,7 @@ module Mutations
 
       def resolve token:
         fb_auth token: token
+        # raise StandardError, "unathorized domain!" unless DOMAINLIST.include?(@payload["email"].split("@")[1])
         begin
           user = User.find_by_uid @payload["sub"]
           user.update(icon_url: @payload["picture"], username: @payload["name"])
