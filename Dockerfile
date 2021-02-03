@@ -1,6 +1,6 @@
 FROM ruby:3.0.0
 
-RUN apt-get update -qq && apt-get install -y nodejs redis-server
+RUN apt-get update -qq && apt-get install -y nodejs redis-server beanstalkd
 
 USER root
 

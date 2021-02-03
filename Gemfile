@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
+gem "activejob", "6.1.0"
 gem "activesupport", "6.1.0"
+gem "backburner", "1.5.0"
 gem "dotenv", "2.7.6"
 gem "firebase_id_token", "2.4.0"
 gem "foreman", "0.87.2"
