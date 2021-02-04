@@ -20,7 +20,7 @@ require "base64"
 require "slack/ruby3"
 require "role_model"
 require "pundit"
-require "backburner"
+
 
 ENV["RACK_ENV"] ||= "development"
 
