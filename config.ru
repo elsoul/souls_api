@@ -7,14 +7,12 @@ map "/playground" do
 end
 
 run SoulsApi
+run Rack::URLMap.new("/" => SoulsApi, "/sidekiq" => Sidekiq::Web)
 
 use Rack::Cors do
+  allowed_headers = %i(get post put patch delete options head)
   allow do
     origins "*"
-    # Only allow a request for ELQUEST
-    resource "/graphql",
-             headers: :any,
-             methods: :post,
-             if: proc { |env| env["HTTP_HOST"] == "el-soul.com" }
+    resource "*", headers: :any, methods: allowed_headers
   end
 end

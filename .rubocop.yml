@@ -1,5 +1,13 @@
 AllCops:
   EnabledByDefault: true
+  Exclude:
+    - "db/migrate/*.rb"
+    - "db/schema.rb"
+    - "spec/queries/*.rb"
+    - "spec/mutations/*.rb"
+    - "spec/factories/*.rb"
+    - "spec/models/*.rb"
+    - "*.gemspec"
 
 Style/AndOr:
   Enabled: false
@@ -27,6 +35,14 @@ Style/MethodCallWithArgsParentheses:
 
 Style/DocumentationMethod:
   Enabled: false
+
+Style/IpAddresses:
+  Exclude:
+    - "config.ru"
+
+Style/StringHashKeys:
+  Exclude:
+    - "config.ru"
 
 Style/CollectionMethods:
   PreferredMethods:
@@ -65,13 +81,10 @@ Style/FormatString:
 Style/MissingElse:
   Enabled: false
 
-Style/StringHashKeys:
-  Exclude:
-    - "spec/queries/*.rb"
-    - "*.gemspec"
-
 Style/GuardClause:
   MinBodyLength: 5
+  Exclude:
+    - "spec/spec_helper.rb"
 
 Style/HashSyntax:
   EnforcedStyle: ruby19
@@ -189,22 +202,18 @@ Layout/MultilineAssignmentLayout:
   Enabled: false
 Style/Send:
   Enabled: false
-Style/RedundantFileExtensionInRequire:
-  Enabled: false
-Style/ClassMethodsDefinitions:
+Style/MixinUsage:
   Enabled: false
 Style/GlobalStdStream:
   Enabled: false
-Layout/IndentationConsistency:
+Lint/ConstantDefinitionInBlock:
   Enabled: false
-Layout/IndentationWidth:
+Layout/TrailingEmptyLines:
   Enabled: false
-Style/DateTime:
-  Enabled: false
-Layout/HeredocIndentation:
-  Exclude: 
-    - "lib/souls/init.rb"
-Style/RaiseArgs:
-  Enabled: false
-Metrics/BlockNesting:
+Style/PercentLiteralDelimiters:
+    Enabled: false
+Style/ClassVars:
+  Exclude:
+  - "spec/spec_helper.rb"
+Style/StringConcatenation:
   Enabled: false

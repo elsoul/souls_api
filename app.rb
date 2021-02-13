@@ -12,8 +12,12 @@ require "factory_bot"
 require "faker"
 require "dotenv/load"
 require "firebase_id_token"
+require "sidekiq"
+require "sidekiq/web"
+require "sidekiq-status"
 require "./config/initializers/firebase_id_token"
 require "./config/initializers/json_web_token"
+require "./config/initializers/sidekiq"
 require "graphql"
 require "logger"
 require "base64"
@@ -31,6 +35,7 @@ ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
 
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
+loader.push_dir("#{Dir.pwd}/app/jobs")
 loader.push_dir("#{Dir.pwd}/app/helpers")
 loader.push_dir("#{Dir.pwd}/app/policies")
 
