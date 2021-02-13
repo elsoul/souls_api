@@ -27,3 +27,5 @@
 /config/master.key
 /config/keyfile.json
 /config/initializers/souls.rb
+dump.rdb
+/imgs/

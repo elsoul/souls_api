@@ -4,28 +4,28 @@ steps:
   - image
   - build
   - -t
-  - asia.gcr.io/$PROJECT_ID/elquest-api
+  - asia.gcr.io/$PROJECT_ID/souls-graph
   - .
 
 - name: gcr.io/cloud-builders/docker
   args:
   - image
   - push
-  - asia.gcr.io/$PROJECT_ID/elquest-api
+  - asia.gcr.io/$PROJECT_ID/souls-graph
 
 - name: gcr.io/cloud-builders/gcloud
   args:
   - run
   - deploy
-  - elquest-api
-  - --image=asia.gcr.io/$PROJECT_ID/elquest-api
+  - souls-graph
+  - --image=asia.gcr.io/$PROJECT_ID/souls-graph
   - --platform=managed
   - --region=asia-northeast1
   - --allow-unauthenticated
   - --memory=2048Mi
   - --concurrency=80
   - --port=8080
-  - --set-cloudsql-instances=el-quest:asia-northeast1:elquest-db
+  - --set-cloudsql-instances=souls-graph:asia-northeast1:souls-db
 
 timeout: 1600s
 options:

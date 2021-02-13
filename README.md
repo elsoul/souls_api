@@ -40,32 +40,13 @@ You can see GraphQL Playground here;
 
 `localhost:3000/playground`
 
-# Run Server on production
-※You need redis-server for production.
+# Run Server with Task Server
+※You need redis-server
 
 ```ruby
-foreman start
+foreman start -f Procfile.dev
 ```
 
-
-# Run Server with Docker
-
-```ruby
-souls p run_test
-```
-
-# Run Client to check response
-
-```ruby
-  rake run_client
-```
-
-Then you will get response below;
-
-```
-"Greeting: Hello world"
-"Greeting: Hello again, world"
-```
 
 
 ## Development
