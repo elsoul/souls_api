@@ -16,6 +16,7 @@ RSpec.describe "User Query テスト" do
           birthday
           lang
           rolesMask
+          isDeleted
         }
       }
     )
@@ -38,6 +39,7 @@ RSpec.describe "User Query テスト" do
         "birthday" => be_a(String),
         "lang" => be_a(String),
         "rolesMask" => be_a(Integer),
+        "isDeleted" => be_in([true, false]),
         )
     end
   end

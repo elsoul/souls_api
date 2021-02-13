@@ -1,8 +1,5 @@
 AllCops:
   EnabledByDefault: true
-  Exclude:
-    - "db/migrate/*.rb"
-    - "db/schema.rb"
 
 Style/AndOr:
   Enabled: false
@@ -71,13 +68,10 @@ Style/MissingElse:
 Style/StringHashKeys:
   Exclude:
     - "spec/queries/*.rb"
-    - "spec/mutations/*.rb"
     - "*.gemspec"
 
 Style/GuardClause:
   MinBodyLength: 5
-  Exclude:
-    - "spec/spec_helper.rb"
 
 Style/HashSyntax:
   EnforcedStyle: ruby19
@@ -139,7 +133,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 40
 
 Metrics/PerceivedComplexity:
   Enabled: false
@@ -195,18 +189,22 @@ Layout/MultilineAssignmentLayout:
   Enabled: false
 Style/Send:
   Enabled: false
-Style/MixinUsage:
+Style/RedundantFileExtensionInRequire:
+  Enabled: false
+Style/ClassMethodsDefinitions:
   Enabled: false
 Style/GlobalStdStream:
   Enabled: false
-Lint/ConstantDefinitionInBlock:
+Layout/IndentationConsistency:
   Enabled: false
-Layout/TrailingEmptyLines:
+Layout/IndentationWidth:
   Enabled: false
-Style/PercentLiteralDelimiters:
-    Enabled: false
-Style/ClassVars:
-  Exclude:
-  - "spec/spec_helper.rb"
-Style/StringConcatenation:
+Style/DateTime:
+  Enabled: false
+Layout/HeredocIndentation:
+  Exclude: 
+    - "lib/souls/init.rb"
+Style/RaiseArgs:
+  Enabled: false
+Metrics/BlockNesting:
   Enabled: false

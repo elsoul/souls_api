@@ -7,11 +7,15 @@ RSpec.describe "ArticleCategory Mutation テスト" do
         createArticleCategory(input: {
           name: "#{article_category[:name]}"
           tags: #{article_category[:tags]}
+          isDeleted: #{article_category[:is_deleted]}
         }) {
-            articleCategory {
+            articleCategoryEdge {
+          node {
               id
               name
               tags
+              isDeleted
+              }
             }
           }
         }
@@ -23,12 +27,15 @@ RSpec.describe "ArticleCategory Mutation テスト" do
     end
 
     it "return ArticleCategory Data" do
-      a1 = result.dig("data", "createArticleCategory", "articleCategory")
+      a1 = result.dig("data", "createArticleCategory", "articleCategoryEdge", "node")
       expect(a1).to include(
         "id" => be_a(String),
         "name" => be_a(String),
         "tags" => be_all(String),
+        "isDeleted" => be_in([true, false]),
         )
+    rescue => error
+      p error
     end
   end
 end

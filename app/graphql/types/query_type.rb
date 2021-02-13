@@ -9,10 +9,11 @@ module Types
     field :user, resolver: Queries::User
     field :users, Types::UserType.connection_type, null: true
 
+    ## Resolvers
+    field :user_search, resolver: Resolvers::UserSearch
+    field :article_search, resolver: Resolvers::ArticleSearch
 
-    def users
-      User.all.order(id: :desc)
-    end
+    ## Connection Type
 
     def article_categories
       ArticleCategory.all.order(id: :desc)
@@ -20,6 +21,10 @@ module Types
 
     def articles
       Article.all.order(id: :desc)
+    end
+
+    def users
+      User.all.order(id: :desc)
     end
   end
 end

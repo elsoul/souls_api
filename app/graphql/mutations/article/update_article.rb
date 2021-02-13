@@ -1,7 +1,7 @@
 module Mutations
   module Article
     class UpdateArticle < BaseMutation
-      field :article, Types::ArticleType, null: false
+      field :article_edge, Types::ArticleNodeType, null: false
 
       argument :id, String, required: true
       argument :title, String, required: false
@@ -20,7 +20,7 @@ module Mutations
         _, args[:article_category_id] = SoulsApiSchema.from_global_id(args[:article_category_id])
         article = ::Article.find args[:id]
         article.update args
-        { article: ::Article.find(args[:id]) }
+        { article_edge: { node: ::Article.find(args[:id]) } }
       rescue StandardError => error
         GraphQL::ExecutionError.new error
       end

@@ -1,7 +1,7 @@
 module Mutations
   module User
     class CreateUser < BaseMutation
-      field :user, Types::UserType, null: false
+      field :user_edge, Types::UserNodeType, null: false
       field :error, String, null: true
 
       argument :uid, String, required: false
@@ -13,11 +13,12 @@ module Mutations
       argument :birthday, String, required: false
       argument :lang, String, required: false
       argument :roles_mask, Integer, required: false
+      argument :is_deleted, Boolean, required: false
 
       def resolve **args
         user = ::User.new args
         if user.save
-          { user: user }
+          { user_edge: { node: user } }
         else
           { error: user.errors.full_messages }
         end

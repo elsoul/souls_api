@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_215521) do
   create_table "article_categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "tags", default: [], array: true
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_article_categories_on_name"
@@ -28,12 +29,13 @@ ActiveRecord::Schema.define(version: 2020_07_14_215521) do
     t.string "title", null: false
     t.text "body", default: "", null: false
     t.string "thumnail_url", default: "", null: false
-    t.datetime "public_date", default: "2029-04-21 12:42:38", null: false
+    t.datetime "public_date", default: "2029-05-02 09:41:25", null: false
     t.bigint "article_category_id", null: false
     t.boolean "is_public", default: false, null: false
     t.boolean "just_created", default: true, null: false
     t.string "slag", null: false
     t.text "tags", default: [], array: true
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
@@ -53,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_215521) do
     t.string "birthday"
     t.string "lang"
     t.integer "roles_mask", default: 1, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email"

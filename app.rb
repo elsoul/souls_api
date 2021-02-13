@@ -20,6 +20,9 @@ require "base64"
 require "slack/ruby3"
 require "role_model"
 require "pundit"
+require "sendgrid-ruby"
+require "search_object"
+require "search_object/plugin/graphql"
 
 ENV["RACK_ENV"] ||= "development"
 
@@ -36,6 +39,7 @@ loader.collapse("#{__dir__}/app/types")
 loader.collapse("#{__dir__}/app/mutations")
 loader.collapse("#{__dir__}/app/queries")
 loader.collapse("#{__dir__}/app/services")
+loader.collapse("#{__dir__}/app/resolvers")
 loader.push_dir("#{Dir.pwd}/app/graphql")
 loader.setup
 

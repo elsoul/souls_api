@@ -3,6 +3,7 @@ class CreateArticleCategories < ActiveRecord::Migration[6.0]
     create_table :article_categories do |t|
       t.string :name, null: false
       t.text :tags, array: true, default: []
+      t.boolean :is_deleted, null: false, default: false
 
       t.timestamps
     end

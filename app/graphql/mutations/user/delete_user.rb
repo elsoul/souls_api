@@ -7,8 +7,8 @@ module Mutations
       def resolve **args
         _, data_id = SoulsApiSchema.from_global_id args[:id]
         user = ::User.find data_id
-        user.destroy
-        { user: user }
+        user.update(is_deleted: true)
+        { user: ::User.find(data_id) }
       rescue StandardError => error
         GraphQL::ExecutionError.new error
       end
