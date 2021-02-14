@@ -1,7 +1,7 @@
 module Mutations
   module User
     class UpdateUser < BaseMutation
-      field :user, Types::UserType, null: false
+      field :user_edge, Types::UserNodeType, null: false
 
       argument :id, String, required: true
       argument :uid, String, required: false
@@ -13,12 +13,13 @@ module Mutations
       argument :birthday, String, required: false
       argument :lang, String, required: false
       argument :roles_mask, Integer, required: false
+      argument :is_deleted, Boolean, required: false
 
       def resolve **args
         _, args[:id] = SoulsApiSchema.from_global_id(args[:id])
         user = ::User.find args[:id]
         user.update args
-        { user: ::User.find(args[:id]) }
+        { user_edge: { node: ::User.find(args[:id]) } }
       rescue StandardError => error
         GraphQL::ExecutionError.new error
       end

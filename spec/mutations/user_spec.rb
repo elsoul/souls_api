@@ -14,8 +14,10 @@ RSpec.describe "User Mutation テスト" do
           birthday: "#{user[:birthday]}"
           lang: "#{user[:lang]}"
           rolesMask: #{user[:roles_mask]}
+          isDeleted: #{user[:is_deleted]}
         }) {
-            user {
+            userEdge {
+          node {
               id
               uid
               username
@@ -26,6 +28,8 @@ RSpec.describe "User Mutation テスト" do
               birthday
               lang
               rolesMask
+              isDeleted
+              }
             }
           }
         }
@@ -37,7 +41,7 @@ RSpec.describe "User Mutation テスト" do
     end
 
     it "return User Data" do
-      a1 = result.dig("data", "createUser", "user")
+      a1 = result.dig("data", "createUser", "userEdge", "node")
       expect(a1).to include(
         "id" => be_a(String),
         "uid" => be_a(String),
@@ -49,6 +53,7 @@ RSpec.describe "User Mutation テスト" do
         "birthday" => be_a(String),
         "lang" => be_a(String),
         "rolesMask" => be_a(Integer),
+        "isDeleted" => be_in([true, false]),
         )
     end
   end

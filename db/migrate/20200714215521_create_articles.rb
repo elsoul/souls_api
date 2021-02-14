@@ -11,6 +11,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.boolean :just_created, default: true, null: false
       t.string :slag, null: false, unique: true
       t.text :tags, array: true, default: []
+      t.boolean :is_deleted, null: false, default: false
 
       t.timestamps
     end

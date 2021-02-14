@@ -1,14 +1,14 @@
 module Mutations
-  module Article
-    class DeleteArticle < BaseMutation
-      field :article, Types::ArticleType, null: false
+  module User
+    class DestroyDeleteUser < BaseMutation
+      field :user, Types::UserType, null: false
       argument :id, String, required: true
 
       def resolve **args
         _, data_id = SoulsApiSchema.from_global_id args[:id]
-        article = ::Article.find data_id
-        article.update(is_deleted: true)
-        { article: ::Article.find(data_id) }
+        user = ::User.find data_id
+        user.destroy
+        { user: user }
       rescue StandardError => error
         GraphQL::ExecutionError.new error
       end

@@ -12,6 +12,7 @@ module Types
     field :birthday, String, null: true
     field :lang, String, null: true
     field :roles_mask, Integer, null: true
+    field :is_deleted, Boolean, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: true
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: true
   end

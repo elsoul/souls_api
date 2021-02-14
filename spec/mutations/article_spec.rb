@@ -2,9 +2,11 @@ RSpec.describe "Article Mutation テスト" do
   describe "Article データを登録する" do
     let(:user) { FactoryBot.create(:user) }
     let(:article_category) { FactoryBot.create(:article_category) }
-      
-    get_global_key = proc { |class_name, id| Base64.encode64("#{class_name}:#{id}") }
-    let(:article) { FactoryBot.attributes_for(:article, article_category_id: get_global_key.call("ArticleCategory", article_category.id)) }
+
+    def get_global_key class_name, id
+      Base64.encode64("#{class_name}:#{id}")
+    end
+    let(:article) { FactoryBot.attributes_for(:article, article_category_id: get_global_key("ArticleCategory", article_category.id)) }
 
     let(:mutation) do
       %(mutation {
@@ -19,7 +21,8 @@ RSpec.describe "Article Mutation テスト" do
           slag: "#{article[:slag]}"
           tags: #{article[:tags]}
         }) {
-            article {
+            articleEdge {
+          node {
               id
               title
               body
@@ -29,6 +32,7 @@ RSpec.describe "Article Mutation テスト" do
               justCreated
               slag
               tags
+              }
             }
           }
         }
@@ -43,7 +47,7 @@ RSpec.describe "Article Mutation テスト" do
     end
 
     it "return Article Data" do
-      a1 = result.dig("data", "createArticle", "article")
+      a1 = result.dig("data", "createArticle", "articleEdge", "node")
       expect(a1).to include(
         "id" => be_a(String),
         "title" => be_a(String),
