@@ -13,6 +13,7 @@ module Resolvers
       argument :is_public, Boolean, required: false
       argument :article_category_id, String, required: false
       argument :tags, [String], required: false
+      argument :is_deleted, Boolean, required: false
       argument :start_date, String, required: false
       argument :end_date, String, required: false
     end
@@ -47,6 +48,7 @@ module Resolvers
       scope = scope.where(is_public: value[:is_public]) if value[:is_public]
       scope = scope.where(article_category_id: decode_global_key(value[:article_category_id])) if value[:article_category_id]
       scope = scope.where("tags @> ARRAY[?]::text[]", value[:tags]) if value[:tags]
+      scope = scope.where(is_deleted: value[:is_deleted]) if value[:is_deleted]
       scope = scope.where("created_at >= ?", value[:start_date]) if value[:start_date]
       scope = scope.where("created_at <= ?", value[:end_date]) if value[:end_date]
 

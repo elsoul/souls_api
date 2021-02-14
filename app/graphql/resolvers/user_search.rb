@@ -16,6 +16,7 @@ module Resolvers
       argument :birthday, String, required: false
       argument :lang, String, required: false
       argument :roles_mask, Integer, required: false
+      argument :is_deleted, Boolean, required: false
       argument :start_date, String, required: false
       argument :end_date, String, required: false
     end
@@ -55,6 +56,7 @@ module Resolvers
       scope = scope.where(birthday: value[:birthday]) if value[:birthday]
       scope = scope.where(lang: value[:lang]) if value[:lang]
       scope = scope.where(roles_mask: value[:roles_mask]) if value[:roles_mask]
+      scope = scope.where(is_deleted: value[:is_deleted]) if value[:is_deleted]
       scope = scope.where("created_at >= ?", value[:start_date]) if value[:start_date]
       scope = scope.where("created_at <= ?", value[:end_date]) if value[:end_date]
 

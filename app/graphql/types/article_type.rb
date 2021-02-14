@@ -13,6 +13,7 @@ module Types
     field :just_created, Boolean, null: true
     field :slag, String, null: true
     field :tags, [String], null: true
+    field :is_deleted, Boolean, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: true
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: true
   end

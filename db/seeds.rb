@@ -21,9 +21,10 @@ end
   puts create_user
 end
 
-5.times do |i|
-  puts create_article_category
+["お知らせ", "特集", "テック", "適時開示", "レシピ"].each do |name|
+  puts ArticleCategory.create(name: name)
 end
+
 users = User.all
 article_categories = ArticleCategory.all
 
