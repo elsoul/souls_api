@@ -1,23 +1,15 @@
-RSpec.describe "User Mutation テスト" do
-  describe "User データを登録する" do
-    let(:user) { FactoryBot.attributes_for(:user) }
+RSpec.describe "UserSearch Resolver テスト" do
+  describe "削除フラグ false の User を返却する" do
+    let!(:user) { FactoryBot.create(:user) }
 
-    let(:mutation) do
-      %(mutation {
-        createUser(input: {
-          uid: "#{user[:uid]}"
-          username: "#{user[:username]}"
-          screenName: "#{user[:screen_name]}"
-          email: "#{user[:email]}"
-          tel: "#{user[:tel]}"
-          iconUrl: "#{user[:icon_url]}"
-          birthday: "#{user[:birthday]}"
-          lang: "#{user[:lang]}"
-          rolesMask: #{user[:roles_mask]}
-          isDeleted: #{user[:is_deleted]}
-        }) {
-            userEdge {
-          node {
+    let(:query) do
+      %(query {
+        userSearch(filter: {
+          isDeleted: false
+      }) {
+          edges {
+            cursor
+            node {
               id
               uid
               username
@@ -31,18 +23,27 @@ RSpec.describe "User Mutation テスト" do
               isDeleted
               }
             }
+            nodes {
+              id
+            }
+            pageInfo {
+              endCursor
+              hasNextPage
+              startCursor
+              hasPreviousPage
+            }
           }
         }
       )
     end
 
     subject(:result) do
-      SoulsApiSchema.execute(mutation).as_json
+      SoulsApiSchema.execute(query).as_json
     end
 
     it "return User Data" do
       begin
-        a1 = result.dig("data", "createUser", "userEdge", "node")
+        a1 = result.dig("data", "userSearch", "edges")[0]["node"]
         raise unless a1.present?
       rescue
         raise StandardError, result
@@ -59,7 +60,7 @@ RSpec.describe "User Mutation テスト" do
         "lang" => be_a(String),
         "rolesMask" => be_a(Integer),
         "isDeleted" => be_in([true, false]),
-        )
+      )
     end
   end
 end

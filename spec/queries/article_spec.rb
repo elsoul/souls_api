@@ -17,6 +17,7 @@ RSpec.describe "Article Query テスト" do
           justCreated
           slag
           tags
+          isDeleted
         }
       }
     )
@@ -27,7 +28,12 @@ RSpec.describe "Article Query テスト" do
   end
 
   it "return Article Data" do
-    a1 = result.dig("data", "article")
+    begin
+      a1 = result.dig("data", "article")
+      raise unless a1.present?
+    rescue
+      raise StandardError, result
+    end
     expect(a1).to include(
       "id" => be_a(String),
         "title" => be_a(String),
@@ -38,6 +44,7 @@ RSpec.describe "Article Query テスト" do
         "justCreated" => be_in([true, false]),
         "slag" => be_a(String),
         "tags" => be_all(String),
+        "isDeleted" => be_in([true, false]),
         )
     end
   end

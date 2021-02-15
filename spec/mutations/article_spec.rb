@@ -20,6 +20,7 @@ RSpec.describe "Article Mutation テスト" do
           justCreated: #{article[:just_created]}
           slag: "#{article[:slag]}"
           tags: #{article[:tags]}
+          isDeleted: #{article[:is_deleted]}
         }) {
             articleEdge {
           node {
@@ -32,6 +33,7 @@ RSpec.describe "Article Mutation テスト" do
               justCreated
               slag
               tags
+              isDeleted
               }
             }
           }
@@ -47,7 +49,12 @@ RSpec.describe "Article Mutation テスト" do
     end
 
     it "return Article Data" do
-      a1 = result.dig("data", "createArticle", "articleEdge", "node")
+      begin
+        a1 = result.dig("data", "createArticle", "articleEdge", "node")
+        raise unless a1.present?
+      rescue
+        raise StandardError, result
+      end
       expect(a1).to include(
         "id" => be_a(String),
         "title" => be_a(String),
@@ -58,6 +65,7 @@ RSpec.describe "Article Mutation テスト" do
         "justCreated" => be_in([true, false]),
         "slag" => be_a(String),
         "tags" => be_all(String),
+        "isDeleted" => be_in([true, false]),
         )
     end
   end

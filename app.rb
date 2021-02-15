@@ -28,7 +28,6 @@ require "sendgrid-ruby"
 require "search_object"
 require "search_object/plugin/graphql"
 
-
 ENV["RACK_ENV"] ||= "development"
 
 db_conf = YAML.safe_load(ERB.new(File.read("./config/database.yml")).result, [], [], true)

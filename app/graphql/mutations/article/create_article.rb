@@ -13,6 +13,7 @@ module Mutations
       argument :just_created, Boolean, required: false
       argument :slag, String, required: false
       argument :tags, [String], required: false
+      argument :is_deleted, Boolean, required: false
 
       def resolve **args
         args[:user_id] = context[:user].id

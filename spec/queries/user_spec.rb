@@ -1,6 +1,6 @@
 RSpec.describe "User Query テスト" do
   describe "User データを取得する" do
-    let(:user) { FactoryBot.create(:user) }
+    let!(:user) { FactoryBot.create(:user) }
 
     let(:query) do
       data_id = Base64.encode64("User:#{user.id}")
@@ -27,7 +27,12 @@ RSpec.describe "User Query テスト" do
   end
 
   it "return User Data" do
-    a1 = result.dig("data", "user")
+    begin
+      a1 = result.dig("data", "user")
+      raise unless a1.present?
+    rescue
+      raise StandardError, result
+    end
     expect(a1).to include(
       "id" => be_a(String),
         "uid" => be_a(String),

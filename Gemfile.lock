@@ -238,7 +238,7 @@ GEM
       sinatra (= 2.1.0)
       tilt (~> 2.0)
     slack-ruby3 (0.1.1)
-    souls (0.15.4)
+    souls (0.15.9)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)

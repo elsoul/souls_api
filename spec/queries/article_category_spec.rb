@@ -1,6 +1,6 @@
 RSpec.describe "ArticleCategory Query テスト" do
   describe "ArticleCategory データを取得する" do
-    let(:article_category) { FactoryBot.create(:article_category) }
+    let!(:article_category) { FactoryBot.create(:article_category) }
 
     let(:query) do
       data_id = Base64.encode64("ArticleCategory:#{article_category.id}")
@@ -20,7 +20,12 @@ RSpec.describe "ArticleCategory Query テスト" do
   end
 
   it "return ArticleCategory Data" do
-    a1 = result.dig("data", "articleCategory")
+    begin
+      a1 = result.dig("data", "articleCategory")
+      raise unless a1.present?
+    rescue
+      raise StandardError, result
+    end
     expect(a1).to include(
       "id" => be_a(String),
         "name" => be_a(String),

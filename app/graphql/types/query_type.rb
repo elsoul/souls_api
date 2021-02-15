@@ -12,6 +12,7 @@ module Types
     ## Resolvers
     field :user_search, resolver: Resolvers::UserSearch
     field :article_search, resolver: Resolvers::ArticleSearch
+    field :article_category_search, resolver: Resolvers::ArticleCategorySearch
 
     ## Connection Type
 
