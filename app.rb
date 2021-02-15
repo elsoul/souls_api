@@ -95,7 +95,6 @@ class SoulsApi < Sinatra::Base
     context = {
       user: user
     }
-    p context[:user]
     result = SoulsApiSchema.execute(
       params[:query],
       variables: params[:variables],
