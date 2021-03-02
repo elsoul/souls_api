@@ -7,7 +7,9 @@ module Resolvers
 
     class ArticleCategoryFilter < ::Types::BaseInputObject
       argument :OR, [self], required: false
-
+      argument :name, String, required: false
+      argument :tags, [String], required: false
+      argument :is_deleted, Boolean, required: false
       argument :is_deleted, Boolean, required: false
       argument :start_date, String, required: false
       argument :end_date, String, required: false
@@ -22,22 +24,11 @@ module Resolvers
       scope.merge branches
     end
 
-    def apply_first(scope, value)
-      scope.limit(value)
-    end
-
-    def apply_skip(scope, value)
-      scope.offset(value)
-    end
-
-    def decode_global_key id
-      _, data_id = SoulsApiSchema.from_global_id id
-      data_id
-    end
-
     def normalize_filters(value, branches = [])
       scope = ::ArticleCategory.all
-
+      scope = scope.where(name: value[:name]) if value[:name]
+      scope = scope.where("tags @> ARRAY[?]::text[]", value[:tags]) if value[:tags]
+      scope = scope.where(is_deleted: value[:is_deleted]) if value[:is_deleted]
       scope = scope.where(is_deleted: value[:is_deleted]) if value[:is_deleted]
       scope = scope.where("created_at >= ?", value[:start_date]) if value[:start_date]
       scope = scope.where("created_at <= ?", value[:end_date]) if value[:end_date]

@@ -32,19 +32,6 @@ module Resolvers
       scope.merge branches
     end
 
-    def apply_first(scope, value)
-      scope.limit(value)
-    end
-
-    def apply_skip(scope, value)
-      scope.offset(value)
-    end
-
-    def decode_global_key id
-      _, data_id = SoulsApiSchema.from_global_id id
-      data_id
-    end
-
     def normalize_filters(value, branches = [])
       scope = ::User.all
       scope = scope.where(uid: value[:uid]) if value[:uid]
