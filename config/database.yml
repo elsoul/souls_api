@@ -13,7 +13,7 @@ development:
 
 production:
   <<: *default
-  database: souls_api_production
+  database: souls_graph_production
   username: <%= ENV.fetch("DB_USER") { "" } %>
   password: <%= ENV.fetch("DB_PW") { "" } %>
   host: <%= ENV.fetch("DB_HOST") { "" } %>

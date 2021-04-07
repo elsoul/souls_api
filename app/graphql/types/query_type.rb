@@ -2,30 +2,13 @@ module Types
   class QueryType < Types::BaseObject
     add_field(GraphQL::Types::Relay::NodeField)
     add_field(GraphQL::Types::Relay::NodesField)
-    field :article_category, resolver: Queries::ArticleCategory
-    field :article_categories, Types::ArticleCategoryType.connection_type, null: true
-    field :article, resolver: Queries::Article
-    field :articles, Types::ArticleType.connection_type, null: true
-    field :user, resolver: Queries::User
-    field :users, Types::UserType.connection_type, null: true
-
-    ## Resolvers
-    field :user_search, resolver: Resolvers::UserSearch
-    field :article_search, resolver: Resolvers::ArticleSearch
-    field :article_category_search, resolver: Resolvers::ArticleCategorySearch
-
-    ## Connection Type
-
-    def article_categories
-      ArticleCategory.all.order(id: :desc)
-    end
-
-    def articles
-      Article.all.order(id: :desc)
-    end
-
-    def users
-      User.all.order(id: :desc)
+    SoulsHelper.get_tables.each do |t|
+      field t.singularize.underscore.to_s.to_sym, resolver: Object.const_get("Queries::#{t.singularize.camelize}")
+      field "#{t.singularize.underscore}_search".to_sym, resolver: Object.const_get("Resolvers::#{t.singularize.camelize}Search")
+      field t.pluralize.underscore.to_s.to_sym, Object.const_get("Types::#{t.singularize.camelize}Type").connection_type, null: true
+      define_method t do
+        Object.const_get(t.singularize.camelize.to_s).all.order(id: :desc)
+      end
     end
   end
 end

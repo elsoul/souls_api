@@ -1,6 +1,6 @@
 require "./app"
 
-Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/factories/*.rb"].sort.each { |file| require file }
+Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/factories/*.rb"].each { |file| require file }
 
 def create_user
   user = FactoryBot.create(:user)

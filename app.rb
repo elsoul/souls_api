@@ -12,13 +12,9 @@ require "factory_bot"
 require "faker"
 require "dotenv/load"
 require "firebase_id_token"
-require "sidekiq"
-require "sidekiq/web"
-require "sidekiq-status"
-require "./config/initializers/firebase_id_token"
-require "./config/initializers/json_web_token"
-require "./config/initializers/sidekiq"
 require "graphql"
+require "google/cloud/storage"
+require "google/cloud/pubsub"
 require "logger"
 require "base64"
 require "slack/ruby3"
@@ -29,12 +25,14 @@ require "search_object"
 require "search_object/plugin/graphql"
 
 ENV["RACK_ENV"] ||= "development"
+Dir["./config/initializers/*.rb"].each { |f| require f }
 
 db_conf = YAML.safe_load(ERB.new(File.read("./config/database.yml")).result, [], [], true)
 ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
 
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
+loader.push_dir("#{Dir.pwd}/app/lib")
 loader.push_dir("#{Dir.pwd}/app/jobs")
 loader.push_dir("#{Dir.pwd}/app/helpers")
 loader.push_dir("#{Dir.pwd}/app/policies")
