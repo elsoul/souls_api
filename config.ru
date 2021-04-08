@@ -7,7 +7,6 @@ map "/playground" do
 end
 
 run SoulsApi
-run Rack::URLMap.new("/" => SoulsApi, "/sidekiq" => Sidekiq::Web)
 
 use Rack::Cors do
   allowed_headers = %i(get post put patch delete options head)

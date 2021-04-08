@@ -25,7 +25,7 @@ require "search_object"
 require "search_object/plugin/graphql"
 
 ENV["RACK_ENV"] ||= "development"
-Dir["./config/*.rb"].each { |f| require f }
+Dir["./config/*.rb"].each { |f| require f unless f.include?("souls.rb") }
 
 db_conf = YAML.safe_load(ERB.new(File.read("./config/database.yml")).result, [], [], true)
 ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
