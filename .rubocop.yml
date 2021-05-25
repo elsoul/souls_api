@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 require: rubocop-graphql
 AllCops:
   SuggestExtensions: false
+=======
+AllCops:
+>>>>>>> origin/master
   EnabledByDefault: true
   Exclude:
     - "db/migrate/*.rb"
@@ -11,6 +15,7 @@ AllCops:
     - "spec/models/*.rb"
     - "spec/resolvers/*.rb"
     - "*.gemspec"
+<<<<<<< HEAD
     - "Rakefile"
 
 GraphQL/OrderedFields:
@@ -42,6 +47,8 @@ GraphQL/FieldDescription:
 
 Style/ColonMethodCall:
   Enabled: false
+=======
+>>>>>>> origin/master
 
 Style/AndOr:
   Enabled: false
@@ -73,7 +80,10 @@ Style/DocumentationMethod:
 Style/IpAddresses:
   Exclude:
     - "config.ru"
+<<<<<<< HEAD
     - "Gemfile"
+=======
+>>>>>>> origin/master
 
 Style/StringHashKeys:
   Exclude:
