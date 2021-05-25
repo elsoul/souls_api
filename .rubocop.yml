@@ -73,6 +73,7 @@ Style/DocumentationMethod:
 Style/IpAddresses:
   Exclude:
     - "config.ru"
+    - "Gemfile"
 
 Style/StringHashKeys:
   Exclude:

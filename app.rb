@@ -36,11 +36,9 @@ loader.push_dir("#{Dir.pwd}/app/lib")
 loader.push_dir("#{Dir.pwd}/app/helpers")
 loader.push_dir("#{Dir.pwd}/app/policies")
 
-loader.do_not_eager_load("#{Dir.pwd}/app/services")
 loader.collapse("#{__dir__}/app/types")
 loader.collapse("#{__dir__}/app/mutations")
 loader.collapse("#{__dir__}/app/queries")
-loader.collapse("#{__dir__}/app/services")
 loader.collapse("#{__dir__}/app/resolvers")
 loader.push_dir("#{Dir.pwd}/app/graphql")
 loader.setup

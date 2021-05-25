@@ -1,2 +1,2 @@
-web: bundle exec puma -p 3000
-worker: redis-server
+web: bundle exec puma -p $PORT -e production
+redis: redis-server
