@@ -3,8 +3,9 @@ module Queries
     type [Types::UserType], null: false
 
     def resolve
-      puts context.to_json
       ::User.all
+    rescue StandardError => error
+      GraphQL::ExecutionError.new error
     end
   end
 end

@@ -1,9 +1,47 @@
+require: rubocop-graphql
 AllCops:
+  SuggestExtensions: false
   EnabledByDefault: true
   Exclude:
     - "db/migrate/*.rb"
     - "db/schema.rb"
-    - "app/services/*.rb"
+    - "spec/queries/*.rb"
+    - "spec/mutations/*.rb"
+    - "spec/factories/*.rb"
+    - "spec/models/*.rb"
+    - "spec/resolvers/*.rb"
+    - "*.gemspec"
+    - "Rakefile"
+
+GraphQL/OrderedFields:
+  Enabled: false
+
+Bundler/GemVersion:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+GraphQL/ExtractType:
+  Enabled: false
+
+GraphQL/ArgumentName:
+  Enabled: false
+
+GraphQL/ExtractInputType:
+  Enabled: false
+
+GraphQL/ObjectDescription:
+  Enabled: false
+
+GraphQL/ArgumentDescription:
+  Enabled: false
+
+GraphQL/FieldDescription:
+  Enabled: false
+
+Style/ColonMethodCall:
+  Enabled: false
 
 Style/AndOr:
   Enabled: false
@@ -31,6 +69,14 @@ Style/MethodCallWithArgsParentheses:
 
 Style/DocumentationMethod:
   Enabled: false
+
+Style/IpAddresses:
+  Exclude:
+    - "config.ru"
+
+Style/StringHashKeys:
+  Exclude:
+    - "config.ru"
 
 Style/CollectionMethods:
   PreferredMethods:
@@ -68,11 +114,6 @@ Style/FormatString:
 
 Style/MissingElse:
   Enabled: false
-
-Style/StringHashKeys:
-  Exclude:
-    - "spec/queries/*.rb"
-    - "*.gemspec"
 
 Style/GuardClause:
   MinBodyLength: 5
@@ -139,7 +180,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 40
 
 Metrics/PerceivedComplexity:
   Enabled: false

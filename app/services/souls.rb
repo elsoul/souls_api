@@ -4,12 +4,11 @@
 module Souls
   module Blog
     class Service
-
       include GRPC::GenericService
 
       self.marshal_class_method = :encode
       self.unmarshal_class_method = :decode
-      self.service_name = 'Souls.Blog'
+      self.service_name = "Souls.Blog"
 
       # Sends a greeting
       rpc :SayHello, ::Souls::HelloRequest, ::Souls::HelloReply

@@ -1,52 +1,108 @@
+require "active_support"
+require "active_support/core_ext"
+require "erb"
+require "json"
 require "sinatra"
+require "sinatra/base"
 require "sinatra/json"
-require "sinatra-env"
-require "mongoid"
+require "sinatra/activerecord"
 require "rack/contrib"
 require "zeitwerk"
+require "factory_bot"
+require "faker"
 require "dotenv/load"
 require "firebase_id_token"
-require "./config/initializers/firebase_id_token"
 require "graphql"
-require "grpc"
-require "erb"
+require "google/cloud/storage"
+require "google/cloud/pubsub"
+require "logger"
+require "base64"
+require "slack/ruby3"
+require "role_model"
+require "pundit"
+require "sendgrid-ruby"
+require "search_object"
+require "search_object/plugin/graphql"
 
-# NoSQL Conf
-YAML.safe_load(ERB.new(File.new("./config/mongoid.yml").read).result)
+ENV["RACK_ENV"] ||= "development"
+Dir["./config/*.rb"].each { |f| require f unless f.include?("souls.rb") }
 
-## SQL Conf
-# db_conf = YAML.safe_load(ERB.new(File.read("./config/database.yml")).result, [], [], true)
-# ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
-
-Dir[File.expand_path "#{Dir.pwd}/app/services/*.rb"].sort.each { |file| require file }
+db_conf = YAML.safe_load(ERB.new(File.read("./config/database.yml")).result, [], [], true)
+ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
 
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
+loader.push_dir("#{Dir.pwd}/app/lib")
+loader.push_dir("#{Dir.pwd}/app/helpers")
+loader.push_dir("#{Dir.pwd}/app/policies")
 
+loader.do_not_eager_load("#{Dir.pwd}/app/services")
 loader.collapse("#{__dir__}/app/types")
 loader.collapse("#{__dir__}/app/mutations")
 loader.collapse("#{__dir__}/app/queries")
+loader.collapse("#{__dir__}/app/services")
+loader.collapse("#{__dir__}/app/resolvers")
 loader.push_dir("#{Dir.pwd}/app/graphql")
 loader.setup
 
+include UserHelper
+
 class SoulsApi < Sinatra::Base
+  include Pundit
+  ::Logger.class_eval { alias_method :write, :<< }
+  access_log = ::File.join(::File.dirname(::File.expand_path(__FILE__)), "log", "access.log")
+  access_logger = ::Logger.new(access_log)
+  error_logger = ::File.new(::File.join(::File.dirname(::File.expand_path(__FILE__)), "log", "error.log"), "a+")
+  error_logger.sync = true
+
   use Rack::JSONBodyParser
+  register Sinatra::ActiveRecordExtension
+
+  configure :production, :development do
+    set :logger, Logger.new(STDOUT)
+    enable :logging
+    use ::Rack::CommonLogger, access_logger
+  end
+
+  before { env["rack.errors"] = error_logger }
+
+  error StandardError do
+    StandardError.to_json
+  end
 
   get "/" do
-    message = { success: true, message: "SOULs Running!" }
+    message = { success: true, message: "SOULs Running!", env: ENV["RACK_ENV"] }
     json message
   end
 
-  post "/graphql" do
-    token = request.env["HTTP_AUTHORIZATION"]
-    context = {
-      token: token
-    }
-    result = SoulsApiSchema.execute(
-      params[:query],
-      variables: params[:variables],
-      context: context
-    )
+  get "/db" do
+    message = { success: true, message: "SOULs Running!", env: ENV["RACK_ENV"], db: User.first.username }
+    json message
+  rescue StandardError => e
+    message = { error: e }
+    json message
+  end
+
+  post "/endpoint" do
+    token = request.env["HTTP_AUTHORIZATION"].split("Bearer ")[1] if request.env["HTTP_AUTHORIZATION"]
+
+    user = token ? login_auth(token: token) : nil
+    context = { user: user }
+    result = SoulsApiSchema.execute(params[:query], variables: params[:variables], context: context)
     json result
+  rescue StandardError => error
+    message = { error: error }
+    json message
+  end
+
+  def login_auth(token:)
+    decoded_token = JsonWebToken.decode token
+    user_id = decoded_token[:user_id]
+    user = User.find user_id
+    raise StandardError, "Invalid or Missing Token" if user.blank?
+    user
+  rescue StandardError => error
+    message = { error: error }
+    json message
   end
 end

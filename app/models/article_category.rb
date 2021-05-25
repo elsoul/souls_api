@@ -1,5 +1,4 @@
-class ArticleCategory
-  include Mongoid::Document
+class ArticleCategory < ActiveRecord::Base
   has_many :article, dependent: :destroy
-  validates :name, uniqueness: true
+  default_scope -> { order(created_at: :desc) }
 end

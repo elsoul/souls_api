@@ -1,6 +1,0 @@
-development:
-  clients:
-    default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
-      options:
-        server_selection_timeout: 5

@@ -1,20 +1,20 @@
 module Types
-  class UserType < Types::BaseObject
-    field :id, String, null: false
-    field :username, String, null: false
-    field :screen_name, String, null: false
-    field :email, String, null: false
+  class UserType < BaseObject
+    implements GraphQL::Types::Relay::Node
+
+    global_id_field :id
+    field :uid, String, null: true
+    field :username, String, null: true
+    field :screen_name, String, null: true
+    field :last_name, String, null: true
+    field :first_name, String, null: true
+    field :last_name_kanji, String, null: true
+    field :first_name_kanji, String, null: true
+    field :last_name_kana, String, null: true
+    field :first_name_kana, String, null: true
+    field :email, String, null: true
+    field :tel, String, null: true
     field :icon_url, String, null: true
     field :birthday, String, null: true
-    field :lang, String, null: true
-    field :total_articles, Integer, null: true
-    field :total_tweets, Integer, null: true
-    field :tw_consumer_key, String, null: true
-    field :tw_consumer_secret, String, null: true
-    field :tw_access_token, String, null: true
-    field :tw_access_token_secret, String, null: true
-    # field :gem, Integer, null: true
-    field :created_at, GraphQL::Types::ISO8601DateTime, null: true
-    field :updated_at, GraphQL::Types::ISO8601DateTime, null: true
   end
 end

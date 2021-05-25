@@ -1,16 +1,16 @@
-class User
-  include Mongoid::Document
-  before_save :downcase_email
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+class User < ActiveRecord::Base
+  has_many :article
+  has_many :order_sheet
 
-  validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
+
+  enum user_role: { user: 0, retailer: 1, agent: 2, staff: 3, admin: 4, master: 5 }
 
   # Scope
-  default_scope -> { order("created_at") }
+  default_scope -> { order("id") }
 
-  private
-
-  def downcase_email
-    self.email = email.downcase
+  def is_retailer?
+    self.retailer_uid.present?
   end
 end

@@ -1,10 +1,13 @@
 module Queries
   class User < Queries::BaseQuery
     type Types::UserType, null: false
-    argument :id, ID, required: true
+    argument :id, String, required: true
 
-    def resolve id:
-      ::User.find id
+    def resolve **args
+      _, data_id = SoulsApiSchema.from_global_id args[:id]
+      ::User.find(data_id)
+    rescue StandardError => error
+      GraphQL::ExecutionError.new error
     end
   end
 end
