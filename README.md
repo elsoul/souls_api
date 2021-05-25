@@ -23,17 +23,16 @@ git clone
 
 ## Usage
 
-Check Rakefile to see what command is available
 
 ```ruby
-rake -T
+souls s
 ```
 
 
 # Run Server on local
 
 ```ruby
-bundle exec puma -p 3000 -e development
+souls s
 ```
 
 You can see GraphQL Playground here;
@@ -54,18 +53,7 @@ foreman start
 souls p run_test
 ```
 
-# Run Client to check response
 
-```ruby
-  rake run_client
-```
-
-Then you will get response below;
-
-```
-"Greeting: Hello world"
-"Greeting: Hello again, world"
-```
 
 
 ## Development
