@@ -21,21 +21,21 @@ RSpec.describe "Article Query テスト" do
         }
       }
     )
-    end
+  end
 
-    subject(:result) do
-      SoulsApiSchema.execute(query).as_json
-    end
+  subject(:result) do
+    SoulsApiSchema.execute(query).as_json
+  end
 
-    it "return Article Data" do
-      begin
-        a1 = result.dig("data", "article")
-        raise unless a1.present?
-      rescue
-        raise StandardError, result
-      end
-      expect(a1).to include(
-        "id" => be_a(String),
+  it "return Article Data" do
+    begin
+      a1 = result.dig("data", "article")
+      raise unless a1.present?
+    rescue
+      raise StandardError, result
+    end
+    expect(a1).to include(
+      "id" => be_a(String),
         "title" => be_a(String),
         "body" => be_a(String),
         "thumnailUrl" => be_a(String),
@@ -44,8 +44,8 @@ RSpec.describe "Article Query テスト" do
         "justCreated" => be_in([true, false]),
         "slag" => be_a(String),
         "tags" => be_all(String),
-        "isDeleted" => be_in([true, false])
-      )
+        "isDeleted" => be_in([true, false]),
+        )
     end
   end
 end

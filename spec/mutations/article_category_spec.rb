@@ -37,8 +37,8 @@ RSpec.describe "ArticleCategory Mutation テスト" do
         "id" => be_a(String),
         "name" => be_a(String),
         "tags" => be_all(String),
-        "isDeleted" => be_in([true, false])
-      )
+        "isDeleted" => be_in([true, false]),
+        )
     end
   end
 end

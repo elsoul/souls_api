@@ -334,7 +334,7 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    souls (0.21.0)
+    souls (0.21.3)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -400,7 +400,7 @@ DEPENDENCIES
   sinatra-contrib (= 2.1.0)
   slack-ruby3 (= 0.1.1)
   solargraph (= 0.40.3)
-  souls (= 0.21.0)
+  souls (= 0.21.3)
   spring (= 2.1.0)
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

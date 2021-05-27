@@ -65,7 +65,7 @@ RSpec.describe "UserSearch Resolver テスト" do
         "email" => be_a(String),
         "tel" => be_a(String),
         "iconUrl" => be_a(String),
-        "birthday" => be_a(String)
+        "birthday" => be_a(String),
       )
     end
   end

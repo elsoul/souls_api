@@ -38,7 +38,9 @@ RSpec.describe "Article Mutation テスト" do
     end
 
     subject(:result) do
-      context = { user: user }
+      context = {
+        user: user
+      }
       SoulsApiSchema.execute(mutation, context: context).as_json
     end
 
@@ -59,8 +61,8 @@ RSpec.describe "Article Mutation テスト" do
         "justCreated" => be_in([true, false]),
         "slag" => be_a(String),
         "tags" => be_all(String),
-        "isDeleted" => be_in([true, false])
-      )
+        "isDeleted" => be_in([true, false]),
+        )
     end
   end
 end

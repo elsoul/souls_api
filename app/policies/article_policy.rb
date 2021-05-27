@@ -16,7 +16,7 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def delete?
-    staff_permissions?
+    admin_permissions?
   end
 
   private

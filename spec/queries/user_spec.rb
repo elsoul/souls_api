@@ -23,21 +23,21 @@ RSpec.describe "User Query テスト" do
         }
       }
     )
-    end
+  end
 
-    subject(:result) do
-      SoulsApiSchema.execute(query).as_json
-    end
+  subject(:result) do
+    SoulsApiSchema.execute(query).as_json
+  end
 
-    it "return User Data" do
-      begin
-        a1 = result.dig("data", "user")
-        raise unless a1.present?
-      rescue
-        raise StandardError, result
-      end
-      expect(a1).to include(
-        "id" => be_a(String),
+  it "return User Data" do
+    begin
+      a1 = result.dig("data", "user")
+      raise unless a1.present?
+    rescue
+      raise StandardError, result
+    end
+    expect(a1).to include(
+      "id" => be_a(String),
         "uid" => be_a(String),
         "username" => be_a(String),
         "screenName" => be_a(String),
@@ -50,8 +50,8 @@ RSpec.describe "User Query テスト" do
         "email" => be_a(String),
         "tel" => be_a(String),
         "iconUrl" => be_a(String),
-        "birthday" => be_a(String)
-      )
+        "birthday" => be_a(String),
+        )
     end
   end
 end

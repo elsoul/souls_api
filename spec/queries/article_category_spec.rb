@@ -13,25 +13,25 @@ RSpec.describe "ArticleCategory Query テスト" do
         }
       }
     )
-    end
+  end
 
-    subject(:result) do
-      SoulsApiSchema.execute(query).as_json
-    end
+  subject(:result) do
+    SoulsApiSchema.execute(query).as_json
+  end
 
-    it "return ArticleCategory Data" do
-      begin
-        a1 = result.dig("data", "articleCategory")
-        raise unless a1.present?
-      rescue
-        raise StandardError, result
-      end
-      expect(a1).to include(
-        "id" => be_a(String),
+  it "return ArticleCategory Data" do
+    begin
+      a1 = result.dig("data", "articleCategory")
+      raise unless a1.present?
+    rescue
+      raise StandardError, result
+    end
+    expect(a1).to include(
+      "id" => be_a(String),
         "name" => be_a(String),
         "tags" => be_all(String),
-        "isDeleted" => be_in([true, false])
-      )
+        "isDeleted" => be_in([true, false]),
+        )
     end
   end
 end
