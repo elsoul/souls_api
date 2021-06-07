@@ -11,10 +11,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-<<<<<<< HEAD
 /config/initializers/souls.rb
-=======
->>>>>>> origin/master
 /elsoul.key
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
@@ -23,20 +20,13 @@
 /infra/config/*
 .env
 .envrc
-<<<<<<< HEAD
-=======
 .irb_history
->>>>>>> origin/master
 /public/assets
 .byebug_history
 .DS_Store
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-<<<<<<< HEAD
-/config/keyfile.json
-=======
 /config/keyfile.json
 /config/initializers/souls.rb
 dump.rdb
 /imgs/
->>>>>>> origin/master

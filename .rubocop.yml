@@ -12,11 +12,13 @@ AllCops:
     - "spec/resolvers/*.rb"
     - "*.gemspec"
 
-
-GraphQL/OrderedFields:
+Bundler/GemVersion:
   Enabled: false
 
-Bundler/GemVersion:
+Style/TopLevelMethodDefinition:
+  Enabled: false
+
+GraphQL/OrderedFields:
   Enabled: false
 
 Naming/PredicateName:

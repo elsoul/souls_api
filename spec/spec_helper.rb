@@ -5,7 +5,6 @@ require "rspec"
 require "rack/test"
 require "database_cleaner"
 require "capybara/rspec"
-require "capybara/user_agent"
 require "webmock/rspec"
 require "pundit/matchers"
 
@@ -34,7 +33,6 @@ RSpec.configure do |config|
   config.order = :random
 
   config.include Capybara::DSL
-  config.include Capybara::UserAgent::DSL
   config.expect_with :rspec do |expectations|
     # config.filter_run_excluding skip: true
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
