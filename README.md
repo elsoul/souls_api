@@ -1,5 +1,5 @@
-# Ruby GraphQL API Server with gRPC
-Ruby GraphQL API Server with gRPC Boilerplate
+# Ruby GraphQL API Server
+Ruby GraphQL API Server Boilerplate
 
 <p align="center">
 
@@ -44,13 +44,6 @@ You can see GraphQL Playground here;
 
 ```ruby
 foreman start
-```
-
-
-# Run Server with Docker
-
-```ruby
-souls p run_test
 ```
 
 
