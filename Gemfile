@@ -34,9 +34,9 @@ group :development, :test do
   gem "pundit-matchers", "1.6.0"
   gem "rack-test", "1.1.0"
   gem "rspec", "3.10.0"
-  gem "rubocop", "1.16.0"
+  gem "rubocop", "1.16.1"
   gem "selenium-webdriver", "3.142.7"
-  gem "solargraph", "0.41.1"
+  gem "solargraph", "0.41.2"
   gem "souls", "0.21.3"
   gem "webmock", "3.13.0"
 end
