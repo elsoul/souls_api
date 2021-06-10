@@ -73,10 +73,4 @@ module SoulsHelper
     end
     tables
   end
-
-  def self.zipcode_ja
-    file_path = "./db/seed_csv/zipcode.txt"
-    zipcodes = File.open(file_path, "r").map { |n| n }
-    zipcodes.sample.strip
-  end
 end
