@@ -1,16 +1,18 @@
 class User < ActiveRecord::Base
+  include RoleModel
   has_many :article
-  has_many :order_sheet
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
 
-  enum user_role: { user: 0, retailer: 1, agent: 2, staff: 3, admin: 4, master: 5 }
+  roles :normal, :user, :admin, :master
+
+  before_create :assign_initial_roles
 
   # Scope
-  default_scope -> { order("id") }
+  default_scope -> { order(created_at: :desc) }
 
-  def is_retailer?
-    self.retailer_uid.present?
+  def assign_initial_roles
+    roles << [:normal]
   end
 end

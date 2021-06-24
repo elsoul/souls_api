@@ -12,13 +12,13 @@ describe ArticlePolicy do
   end
 
   context "being a staff" do
-    let(:user) { FactoryBot.create(:user, user_role: 3) }
+    let(:user) { FactoryBot.create(:user, roles_mask: 3) }
 
     it { is_expected.to permit_actions([:create, :update]) }
   end
 
   context "being an administrator" do
-    let(:user) { FactoryBot.create(:user, user_role: 4) }
+    let(:user) { FactoryBot.create(:user, roles_mask: 4) }
 
     it { is_expected.to permit_actions([:create, :update, :delete]) }
   end

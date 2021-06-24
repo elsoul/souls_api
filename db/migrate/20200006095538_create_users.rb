@@ -17,7 +17,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :gender, null: false, default: ""
       t.string :lang, null: false, default: "ja"
       t.string :category, null: false, default: "user"
-      t.integer :user_role, null: false, default: 0
+      t.integer :roles_mask, null: false, default: 1
       t.boolean :is_deleted, null: false, default: false
       t.timestamps
     end

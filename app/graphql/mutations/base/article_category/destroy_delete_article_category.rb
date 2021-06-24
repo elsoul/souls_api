@@ -1,5 +1,5 @@
 module Mutations
-  module ArticleCategory
+  module Base::ArticleCategory
     class DestroyDeleteArticleCategory < BaseMutation
       field :article_category, Types::ArticleCategoryType, null: false
       argument :id, String, required: true

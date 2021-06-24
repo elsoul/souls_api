@@ -26,7 +26,7 @@ def app
 end
 
 Pundit::Matchers.configure do |config|
-  config.user_alias = :user_role
+  # config.user_alias = :user_role
 end
 
 RSpec.configure do |config|
