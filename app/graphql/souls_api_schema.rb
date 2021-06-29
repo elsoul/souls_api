@@ -2,6 +2,7 @@ class SoulsApiSchema < GraphQL::Schema
   default_max_page_size 100
   mutation(Types::MutationType)
   query(Types::QueryType)
+  use GraphQL::Batch
 
   def self.id_from_object(object, type_definition, query_ctx)
     # Call your application"s UUID method here
