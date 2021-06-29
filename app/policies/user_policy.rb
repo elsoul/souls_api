@@ -8,11 +8,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    staff_permissions?
+    true
   end
 
   def update?
-    staff_permissions?
+    true
   end
 
   def delete?
@@ -21,11 +21,15 @@ class UserPolicy < ApplicationPolicy
 
   private
 
-  def staff_permissions?
-    @user.master? or @user.admin? or @user.staff?
+  def user_permissions?
+    @user.user? or @user.admin? or @user.master?
   end
 
   def admin_permissions?
     @user.master? or @user.admin?
+  end
+
+  def update_user_role?
+    @user.master?
   end
 end

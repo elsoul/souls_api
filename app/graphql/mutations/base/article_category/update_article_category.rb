@@ -1,5 +1,5 @@
 module Mutations
-  module ArticleCategory
+  module Base::ArticleCategory
     class UpdateArticleCategory < BaseMutation
       field :article_category_edge, Types::ArticleCategoryNodeType, null: false
 

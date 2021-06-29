@@ -8,11 +8,11 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def create?
-    staff_permissions?
+    user_permissions?
   end
 
   def update?
-    staff_permissions?
+    user_permissions?
   end
 
   def delete?
@@ -21,8 +21,8 @@ class ArticlePolicy < ApplicationPolicy
 
   private
 
-  def staff_permissions?
-    @user.master? or @user.admin? or @user.staff?
+  def user_permissions?
+    @user.master? or @user.admin? or @user.user?
   end
 
   def admin_permissions?

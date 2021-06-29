@@ -1,5 +1,5 @@
 module Mutations
-  module User
+  module Base::User
     class DestroyDeleteUser < BaseMutation
       field :user, Types::UserType, null: false
       argument :id, String, required: true

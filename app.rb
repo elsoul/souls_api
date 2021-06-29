@@ -23,6 +23,7 @@ require "pundit"
 require "sendgrid-ruby"
 require "search_object"
 require "search_object/plugin/graphql"
+require "graphql/batch"
 
 ENV["RACK_ENV"] ||= "development"
 Dir["./config/*.rb"].each { |f| require f unless f.include?("souls.rb") }
@@ -32,7 +33,7 @@ ActiveRecord::Base.establish_connection(db_conf[ENV["RACK_ENV"]])
 
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
-loader.push_dir("#{Dir.pwd}/app/lib")
+loader.push_dir("#{Dir.pwd}/app/utils")
 loader.push_dir("#{Dir.pwd}/app/helpers")
 loader.push_dir("#{Dir.pwd}/app/policies")
 

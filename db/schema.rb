@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_215521) do
     t.string "title", null: false
     t.text "body", default: "", null: false
     t.string "thumnail_url", default: "", null: false
-    t.datetime "public_date", default: "2021-07-10 13:46:57", null: false
+    t.datetime "public_date", default: "2021-07-24 20:19:47", null: false
     t.bigint "article_category_id", null: false
     t.boolean "is_public", default: false, null: false
     t.boolean "just_created", default: true, null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_215521) do
     t.string "gender", default: "", null: false
     t.string "lang", default: "ja", null: false
     t.string "category", default: "user", null: false
-    t.integer "user_role", default: 0, null: false
+    t.integer "roles_mask", default: 1, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

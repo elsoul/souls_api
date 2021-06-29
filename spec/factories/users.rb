@@ -17,7 +17,7 @@ FactoryBot.define do
     gender { Gimei.male }
     lang { "ja" }
     category { "user" }
-    user_role { 0 }
+    roles_mask { :normal }
     is_deleted { false }
   end
 end

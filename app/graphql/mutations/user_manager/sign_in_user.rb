@@ -1,5 +1,5 @@
 module Mutations
-  module User
+  module UserManager
     class SignInUser < BaseMutation
       field :status, String, null: false
       field :username, String, null: true
