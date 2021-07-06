@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :article
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  private_constant :VALID_EMAIL_REGEX
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
 
   roles :normal, :user, :admin, :master

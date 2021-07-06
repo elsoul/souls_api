@@ -18,13 +18,13 @@ module Mutations
       argument :uid, String, required: false
       argument :username, String, required: false
 
-      def resolve **args
+      def resolve(**args)
         _, args[:id] = SoulsApiSchema.from_global_id(args[:id])
-        user = ::User.find args[:id]
-        user.update args
+        user = ::User.find(args[:id])
+        user.update(args)
         { user_edge: { node: ::User.find(args[:id]) } }
-      rescue StandardError => error
-        GraphQL::ExecutionError.new error
+      rescue StandardError => e
+        GraphQL::ExecutionError.new(e)
       end
     end
   end

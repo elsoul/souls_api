@@ -30,8 +30,8 @@ module Resolvers
     option :skip, type: types.Int, with: :apply_skip
 
     def apply_filter(scope, value)
-      branches = normalize_filters(value).inject { |a, b| a.or(b) }
-      scope.merge branches
+      branches = normalize_filters(value).inject { |acc, elem| acc.or(elem) }
+      scope.merge(branches)
     end
 
     def normalize_filters(value, branches = [])
@@ -55,7 +55,7 @@ module Resolvers
 
       branches << scope
 
-      value[:OR].inject(branches) { |s, v| normalize_filters(v, s) } if value[:OR].present?
+      value[:OR].inject(branches) { |acc, elem| normalize_filters(elem, acc) } if value[:OR].present?
 
       branches
     end

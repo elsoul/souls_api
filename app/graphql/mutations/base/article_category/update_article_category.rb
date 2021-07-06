@@ -8,13 +8,13 @@ module Mutations
       argument :name, String, required: false
       argument :tags, [String], required: false
 
-      def resolve **args
+      def resolve(**args)
         _, args[:id] = SoulsApiSchema.from_global_id(args[:id])
-        article_category = ::ArticleCategory.find args[:id]
-        article_category.update args
+        article_category = ::ArticleCategory.find(args[:id])
+        article_category.update(args)
         { article_category_edge: { node: ::ArticleCategory.find(args[:id]) } }
-      rescue StandardError => error
-        GraphQL::ExecutionError.new error
+      rescue StandardError => e
+        GraphQL::ExecutionError.new(e)
       end
     end
   end

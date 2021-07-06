@@ -7,20 +7,19 @@ module Mutations
 
     def fb_auth(token:)
       FirebaseIdToken::Certificates.request!
-      sleep 3 if ENV["RACK_ENV"] == "development"
-      @payload = FirebaseIdToken::Signature.verify token
-      raise ArgumentError, "Invalid or Missing Token" if @payload.blank?
+      sleep(3) if ENV["RACK_ENV"] == "development"
+      @payload = FirebaseIdToken::Signature.verify(token)
+      raise(ArgumentError, "Invalid or Missing Token") if @payload.blank?
+
       @payload
     end
 
     def auth_check(context)
-      if context[:user].nil?
-        raise GraphQL::ExecutionError, "You need to sign in!!"
-      end
+      raise(GraphQL::ExecutionError, "You need to sign in!!") if context[:user].nil?
     end
 
     def get_token(token)
-      JsonWebToken.decode token
+      JsonWebToken.decode(token)
     end
 
     def production?

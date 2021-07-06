@@ -1,8 +1,10 @@
-RSpec.describe "Article Mutation テスト" do
+RSpec.describe("Article Mutation テスト") do
   describe "Article データを登録する" do
     let(:user) { FactoryBot.create(:user) }
     let(:article_category) { FactoryBot.create(:article_category) }
-    let(:article) { FactoryBot.attributes_for(:article, article_category_id: get_global_key("ArticleCategory", article_category.id)) }
+    let(:article) do
+      FactoryBot.attributes_for(:article, article_category_id: get_global_key("ArticleCategory", article_category.id))
+    end
 
     let(:mutation) do
       %(mutation {
@@ -38,9 +40,7 @@ RSpec.describe "Article Mutation テスト" do
     end
 
     subject(:result) do
-      context = {
-        user: user
-      }
+      context = { user: user }
       SoulsApiSchema.execute(mutation, context: context).as_json
     end
 
@@ -48,21 +48,23 @@ RSpec.describe "Article Mutation テスト" do
       begin
         a1 = result.dig("data", "createArticle", "articleEdge", "node")
         raise unless a1.present?
-      rescue
-        raise StandardError, result
+      rescue StandardError
+        raise(StandardError, result)
       end
-      expect(a1).to include(
-        "id" => be_a(String),
-        "title" => be_a(String),
-        "body" => be_a(String),
-        "thumnailUrl" => be_a(String),
-        "publicDate" => be_a(String),
-        "isPublic" => be_in([true, false]),
-        "justCreated" => be_in([true, false]),
-        "slag" => be_a(String),
-        "tags" => be_all(String),
-        "isDeleted" => be_in([true, false]),
+      expect(a1).to(
+        include(
+          "id" => be_a(String),
+          "title" => be_a(String),
+          "body" => be_a(String),
+          "thumnailUrl" => be_a(String),
+          "publicDate" => be_a(String),
+          "isPublic" => be_in([true, false]),
+          "justCreated" => be_in([true, false]),
+          "slag" => be_a(String),
+          "tags" => be_all(String),
+          "isDeleted" => be_in([true, false])
         )
+      )
     end
   end
 end

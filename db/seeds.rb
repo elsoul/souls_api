@@ -1,7 +1,7 @@
 require "./app"
 
-Dir[File.expand_path "#{Rack::Directory.new("").root}/spec/factories/*.rb"].
-  each { |file| require file }
+Dir[File.expand_path("#{Rack::Directory.new('').root}/spec/factories/*.rb")]
+  .each { |file| require file }
 
 def create_user
   gimei = Gimei.name
@@ -17,7 +17,7 @@ def create_user
       first_name_kana: gimei.first.katakana,
       gender: gimei.gender
     )
-  puts user.to_json
+  puts(user.to_json)
   return user.id if user
 end
 
@@ -37,7 +37,7 @@ end
 
 10.times { create_user }
 
-100.times do |i|
+100.times do |_i|
   user_id = User.find(rand(5).to_i + 1).id
   article_category_id = ArticleCategory.find(rand(3).to_i + 1).id
   puts create_article(user_id, article_category_id)

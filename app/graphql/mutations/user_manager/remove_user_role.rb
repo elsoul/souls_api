@@ -8,10 +8,11 @@ module Mutations
 
       def resolve(**args)
         check_user_permissions(context[:user], context[:user], :update_user_role?)
-        _, user_id = SoulsApiSchema.from_global_id args[:target_user_id]
-        target_user = ::User.find user_id
-        args[:user_roles].each { |role| target_user.roles.delete role }
+        _, user_id = SoulsApiSchema.from_global_id(args[:target_user_id])
+        target_user = ::User.find(user_id)
+        args[:user_roles].each { |role| target_user.roles.delete(role) }
         return { user: target_user } if target_user.save
+
         raise
       rescue StandardError => e
         GraphQL::ExecutionError.new(e.to_s)

@@ -4,8 +4,8 @@ module Queries
 
     def resolve
       ::User.find(context[:user].id)
-    rescue StandardError => error
-      GraphQL::ExecutionError.new error
+    rescue StandardError => e
+      GraphQL::ExecutionError.new(e)
     end
   end
 end

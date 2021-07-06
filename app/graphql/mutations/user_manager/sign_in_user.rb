@@ -2,15 +2,15 @@ module Mutations
   module UserManager
     class SignInUser < BaseMutation
       field :status, String, null: false
-      field :username, String, null: true
       field :token, String, null: true
       field :user_role, String, null: true
+      field :username, String, null: true
       argument :token, String, required: false
 
       def resolve(token:)
-        fb_auth token: token
+        fb_auth(token: token)
         begin
-          user = ::User.find_by_uid @payload["sub"]
+          user = ::User.find_by_uid(@payload["sub"])
           user.update(icon_url: @payload["picture"], username: @payload["name"])
           token_base = JsonWebToken.encode(user_id: user.id)
           {

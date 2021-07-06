@@ -15,15 +15,15 @@ module Mutations
       argument :thumnail_url, String, required: false
       argument :title, String, required: false
 
-      def resolve **args
+      def resolve(**args)
         args[:user_id] = context[:user].id
         _, args[:id] = SoulsApiSchema.from_global_id(args[:id])
         _, args[:article_category_id] = SoulsApiSchema.from_global_id(args[:article_category_id])
-        article = ::Article.find args[:id]
-        article.update args
+        article = ::Article.find(args[:id])
+        article.update(args)
         { article_edge: { node: ::Article.find(args[:id]) } }
-      rescue StandardError => error
-        GraphQL::ExecutionError.new error
+      rescue StandardError => e
+        GraphQL::ExecutionError.new(e)
       end
     end
   end

@@ -1,4 +1,4 @@
-RSpec.describe "ArticleCategory Query テスト" do
+RSpec.describe("ArticleCategory Query テスト") do
   describe "ArticleCategory データを取得する" do
     let!(:article_category) { FactoryBot.create(:article_category) }
 
@@ -13,25 +13,27 @@ RSpec.describe "ArticleCategory Query テスト" do
         }
       }
     )
-  end
-
-  subject(:result) do
-    SoulsApiSchema.execute(query).as_json
-  end
-
-  it "return ArticleCategory Data" do
-    begin
-      a1 = result.dig("data", "articleCategory")
-      raise unless a1.present?
-    rescue
-      raise StandardError, result
     end
-    expect(a1).to include(
-      "id" => be_a(String),
-        "name" => be_a(String),
-        "tags" => be_all(String),
-        "isDeleted" => be_in([true, false]),
+
+    subject(:result) do
+      SoulsApiSchema.execute(query).as_json
+    end
+
+    it "return ArticleCategory Data" do
+      begin
+        a1 = result.dig("data", "articleCategory")
+        raise unless a1.present?
+      rescue StandardError
+        raise(StandardError, result)
+      end
+      expect(a1).to(
+        include(
+          "id" => be_a(String),
+          "name" => be_a(String),
+          "tags" => be_all(String),
+          "isDeleted" => be_in([true, false])
         )
+      )
     end
   end
 end

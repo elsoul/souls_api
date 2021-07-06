@@ -4,13 +4,13 @@ module Mutations
       field :article_category, Types::ArticleCategoryType, null: false
       argument :id, String, required: true
 
-      def resolve **args
-        _, data_id = SoulsApiSchema.from_global_id args[:id]
-        article_category = ::ArticleCategory.find data_id
+      def resolve(**args)
+        _, data_id = SoulsApiSchema.from_global_id(args[:id])
+        article_category = ::ArticleCategory.find(data_id)
         article_category.update(is_deleted: true)
         { article_category: ::ArticleCategory.find(data_id) }
-      rescue StandardError => error
-        GraphQL::ExecutionError.new error
+      rescue StandardError => e
+        GraphQL::ExecutionError.new(e)
       end
     end
   end
