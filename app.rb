@@ -39,8 +39,6 @@ ActiveRecord::Base.default_timezone = :local
 loader = Zeitwerk::Loader.new
 loader.push_dir("#{Dir.pwd}/app/models")
 loader.push_dir("#{Dir.pwd}/app/utils")
-loader.push_dir("#{Dir.pwd}/app/engines")
-loader.push_dir("#{Dir.pwd}/app/helpers")
 loader.push_dir("#{Dir.pwd}/app/policies")
 
 loader.do_not_eager_load("#{Dir.pwd}/app/services")
@@ -54,7 +52,7 @@ loader.setup
 
 class SoulsApi < Sinatra::Base
   include Pundit
-  include UserHelper
+  include SoulsHelper
   ::Logger.class_eval { alias_method :write, :<< }
   access_log = ::File.join(::File.dirname(::File.expand_path(__FILE__)), "log", "access.log")
   access_logger = ::Logger.new(access_log)

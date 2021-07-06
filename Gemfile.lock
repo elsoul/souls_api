@@ -138,7 +138,7 @@ GEM
       google-cloud-core (~> 1.6)
       googleauth (>= 0.16.2, < 2.a)
       mini_mime (~> 1.0)
-    google-protobuf (3.17.3-x86_64-linux)
+    google-protobuf (3.17.3-universal-darwin)
     googleapis-common-protos (1.3.11)
       google-protobuf (~> 3.14)
       googleapis-common-protos-types (>= 1.0.6, < 2.0)
@@ -157,7 +157,7 @@ GEM
       graphql (>= 1.3, < 2)
       promise.rb (~> 0.7.2)
     graphql_playground (0.0.1)
-    grpc (1.38.0-x86_64-linux)
+    grpc (1.38.0-universal-darwin)
       google-protobuf (~> 3.15)
       googleapis-common-protos-types (~> 1.0)
     grpc-google-iam-v1 (0.6.11)
@@ -196,7 +196,7 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.7)
-    nokogiri (1.11.7-x86_64-linux)
+    nokogiri (1.11.7-x86_64-darwin)
       racc (~> 1.4)
     os (1.1.1)
     parallel (1.20.1)
@@ -358,7 +358,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  x86_64-linux
+  x86_64-darwin-20
 
 DEPENDENCIES
   action_csv (= 0.1.5)
@@ -406,4 +406,4 @@ DEPENDENCIES
   zeitwerk (= 2.4.2)
 
 BUNDLED WITH
-   2.2.21
+   2.2.22
