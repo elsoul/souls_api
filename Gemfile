@@ -26,7 +26,6 @@ gem "slack-ruby3", "0.1.2"
 gem "zeitwerk", "2.4.2"
 
 group :development, :test do
-  gem "action_csv", "0.1.5"
   gem "capybara", "3.35.3"
   gem "database_cleaner", "2.0.1"
   gem "factory_bot", "6.2.0"
