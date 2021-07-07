@@ -19,7 +19,11 @@ module Types
 
     unless ENV["RACK_ENV"] == "test"
       def user
-        RecordLoader.for(User).load(object.user.id)
+        RecordLoader.for(User).load(object.user_id)
+      end
+
+      def article_category
+        RecordLoader.for(ArticleCategory).load(object.article_category_id)
       end
     end
   end
