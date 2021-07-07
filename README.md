@@ -1,5 +1,5 @@
-# Ruby GraphQL API Server
-Ruby GraphQL API Server Boilerplate
+# SOULs Ruby GraphQL API Server
+SOULs Ruby GraphQL API Server Boilerplate
 
 <p align="center">
 
@@ -20,31 +20,24 @@ git clone
 ```
 
 
-
-## Usage
-
-
-```ruby
-souls s
-```
-
-
 # Run Server on local
 
 ```ruby
 souls s
 ```
 
+
+## SOULs Document
+
+- [SOULs Document](https://souls-doc.el-soul.com/)
+
+
+
+
 You can see GraphQL Playground here;
 
 `localhost:3000/playground`
 
-# Run Server on production
-※You need redis-server for production.
-
-```ruby
-foreman start
-```
 
 
 

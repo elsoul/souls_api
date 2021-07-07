@@ -16,5 +16,11 @@ module Types
     field :title, String, null: true
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: true
     field :user, Types::UserType, null: false
+
+    unless ENV["RACK_ENV"] == "test"
+      def user
+        RecordLoader.for(User).load(object.user.id)
+      end
+    end
   end
 end
