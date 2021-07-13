@@ -1,7 +1,7 @@
 module Mutations
   module Base::Article
     class UpdateArticle < BaseMutation
-      field :article_edge, Types::ArticleNodeType, null: false
+      field :article_edge, Types::ArticleType.edge_type, null: false
 
       argument :article_category_id, String, required: false
       argument :body, String, required: false

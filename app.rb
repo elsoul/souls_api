@@ -47,6 +47,9 @@ loader.collapse("#{__dir__}/app/mutations")
 loader.collapse("#{__dir__}/app/queries")
 loader.collapse("#{__dir__}/app/services")
 loader.collapse("#{__dir__}/app/resolvers")
+loader.collapse("#{__dir__}/app/graphql/types/connections")
+loader.collapse("#{__dir__}/app/graphql/types/edges")
+loader.collapse("#{__dir__}/app/graphql/types/base")
 loader.push_dir("#{Dir.pwd}/app/graphql")
 loader.setup
 

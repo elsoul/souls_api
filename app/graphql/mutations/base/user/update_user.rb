@@ -1,7 +1,7 @@
 module Mutations
   module Base::User
     class UpdateUser < BaseMutation
-      field :user_edge, Types::UserNodeType, null: false
+      field :user_edge, Types::UserType.edge_type, null: false
 
       argument :birthday, String, required: false
       argument :email, String, required: false

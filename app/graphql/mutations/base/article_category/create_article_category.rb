@@ -1,7 +1,7 @@
 module Mutations
   module Base::ArticleCategory
     class CreateArticleCategory < BaseMutation
-      field :article_category_edge, Types::ArticleCategoryNodeType, null: false
+      field :article_category_edge, Types::ArticleCategoryType.edge_type, null: false
       field :error, String, null: true
 
       argument :is_deleted, Boolean, required: false

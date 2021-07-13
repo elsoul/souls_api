@@ -2,7 +2,7 @@ module Mutations
   module Base::User
     class CreateUser < BaseMutation
       field :error, String, null: true
-      field :user_edge, Types::UserNodeType, null: false
+      field :user_edge, Types::UserType.edge_type, null: false
 
       argument :birthday, String, required: false
       argument :email, String, required: false

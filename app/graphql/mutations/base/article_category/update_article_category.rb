@@ -1,7 +1,7 @@
 module Mutations
   module Base::ArticleCategory
     class UpdateArticleCategory < BaseMutation
-      field :article_category_edge, Types::ArticleCategoryNodeType, null: false
+      field :article_category_edge, Types::ArticleCategoryType.edge_type, null: false
 
       argument :id, String, required: true
       argument :is_deleted, Boolean, required: false
