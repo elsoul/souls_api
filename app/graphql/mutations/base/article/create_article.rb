@@ -18,12 +18,10 @@ module Mutations
       def resolve(**args)
         args[:user_id] = context[:user].id
         _, args[:article_category_id] = SoulsApiSchema.from_global_id(args[:article_category_id])
-        article = ::Article.new(args)
-        if article.save
-          { article_edge: { node: article } }
-        else
-          { error: article.errors.full_messages }
-        end
+        data = ::Article.new(args)
+        raise(StandardError, data.errors.full_messages) unless data.save
+
+        { article_edge: { node: data } }
       rescue StandardError => e
         GraphQL::ExecutionError.new(e)
       end

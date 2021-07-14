@@ -9,12 +9,10 @@ module Mutations
       argument :tags, [String], required: false
 
       def resolve(**args)
-        article_category = ::ArticleCategory.new(args)
-        if article_category.save
-          { article_category_edge: { node: article_category } }
-        else
-          { error: article_category.errors.full_messages }
-        end
+        data = ::ArticleCategory.new(args)
+        raise(StandardError, data.errors.full_messages) unless data.save
+
+        { article_category_edge: { node: data } }
       rescue StandardError => e
         GraphQL::ExecutionError.new(e)
       end

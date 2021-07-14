@@ -19,12 +19,10 @@ module Mutations
       argument :username, String, required: false
 
       def resolve(**args)
-        user = ::User.new(args)
-        if user.save
-          { user_edge: { node: user } }
-        else
-          { error: user.errors.full_messages }
-        end
+        data = ::User.new(args)
+        raise(StandardError, data.errors.full_messages) unless data.save
+
+        { user_edge: { node: data } }
       rescue StandardError => e
         GraphQL::ExecutionError.new(e)
       end
