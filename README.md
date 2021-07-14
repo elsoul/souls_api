@@ -29,7 +29,7 @@ souls s
 
 ## SOULs Document
 
-- [SOULs Document](https://souls-doc.el-soul.com/)
+- [SOULs Document](https://souls.elsoul.nl/)
 
 
 
