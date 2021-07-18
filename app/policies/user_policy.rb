@@ -8,11 +8,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    user_permissions?
   end
 
   def update?
-    true
+    user_permissions?
   end
 
   def delete?
