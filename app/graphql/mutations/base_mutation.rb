@@ -14,6 +14,24 @@ module Mutations
       @payload
     end
 
+    def graphql_query(mutation: "PushGemDl", args: {})
+      if args.blank?
+        %(mutation { #{mutation}(input: {}) {
+            response
+          }
+        })
+      else
+        inputs = ""
+        args.each do |key, value|
+          inputs += "#{key}: #{value} "
+        end
+        %(mutation { #{mutation}(input: {#{inputs}}) {
+            response
+          }
+        })
+      end
+    end
+
     def auth_check(context)
       raise(GraphQL::ExecutionError, "You need to sign in!!") if context[:user].nil?
     end

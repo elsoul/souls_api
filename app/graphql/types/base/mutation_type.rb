@@ -8,9 +8,19 @@ module Types
               )
       end
     end
-    # Auth
-    field :add_user_role, mutation: Mutations::UserManager::AddUserRole
-    field :remove_user_role, mutation: Mutations::UserManager::RemoveUserRole
-    field :sign_in_user, mutation: Mutations::UserManager::SignInUser
+
+    managers =
+      Dir["./app/graphql/mutations/managers/*_manager/*.rb"].map do |file|
+        {
+          class: file.match(%r{managers/(.+?)_})[1],
+          name: file.match(%r{/([^/]+)/?$})[1].gsub(".rb", "")
+        }
+      end
+    managers.each do |file|
+      field file[:name].underscore.to_s.to_sym,
+            mutation: Object.const_get(
+              "Mutations::Managers::#{file[:class].singularize.camelize}Manager::#{file[:name].singularize.camelize}"
+            )
+    end
   end
 end

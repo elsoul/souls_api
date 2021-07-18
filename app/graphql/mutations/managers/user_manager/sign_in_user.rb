@@ -1,5 +1,5 @@
 module Mutations
-  module UserManager
+  module Managers::UserManager
     class SignInUser < BaseMutation
       field :status, String, null: false
       field :token, String, null: true
