@@ -13,6 +13,8 @@ module Types
     field :last_name, String, null: true
     field :last_name_kana, String, null: true
     field :last_name_kanji, String, null: true
+    field :roles, String, null: true
+    field :roles_mask, Integer, null: true
     field :screen_name, String, null: true
     field :tel, String, null: true
     field :uid, String, null: true
