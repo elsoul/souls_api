@@ -14,7 +14,7 @@ module Mutations
       @payload
     end
 
-    def graphql_query(mutation: "PushGemDl", args: {})
+    def graphql_query(mutation: "SendUserMail", args: {})
       if args.blank?
         %(mutation { #{mutation}(input: {}) {
             response
