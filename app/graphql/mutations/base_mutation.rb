@@ -14,7 +14,7 @@ module Mutations
       @payload
     end
 
-    def graphql_query(mutation: "SendUserMail", args: {})
+    def graphql_query(mutation: "SendUserMailJob", args: {})
       if args.blank?
         %(mutation { #{mutation}(input: {}) {
             response
@@ -23,13 +23,27 @@ module Mutations
       else
         inputs = ""
         args.each do |key, value|
-          inputs += "#{key}: #{value} "
+          inputs +=
+            if value.instance_of?(String)
+              "#{key.to_s.underscore.camelize(:lower)}: \"#{value}\" "
+            else
+              "#{key.to_s.underscore.camelize(:lower)}: #{value} "
+            end
         end
-        %(mutation { #{mutation}(input: {#{inputs}}) {
+        %(mutation { #{mutation.to_s.underscore.camelize(:lower)}(input: {#{inputs}}) {
             response
           }
         })
       end
+    end
+
+    def check_user_permissions(user, obj, method)
+      raise(StandardError, "Invalid or Missing Token") unless user
+
+      policy_class = obj.class.name + "Policy"
+      policy_clazz = policy_class.constantize.new(user, obj)
+      permission = policy_clazz.public_send(method)
+      raise(Pundit::NotAuthorizedError, "permission error!") unless permission
     end
 
     def auth_check(context)
